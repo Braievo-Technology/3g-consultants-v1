@@ -44,10 +44,12 @@ model JobOpportunities {
   status               JobStatus
   job_description      String?
   requirements         String?
+
+  applications JobApplications[] // 1-to-many relation
 }
 
 model JobApplications {
-  id              Int                    @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   name            String
   email           String
   contact         String?
@@ -55,14 +57,10 @@ model JobApplications {
   expected_salary Decimal?
   cv_name         String?
   cover_letter    String?
-  skills          JobApplicationSkills[]
-}
+  skills          String
 
-model JobApplicationSkills {
-  id            Int             @id @default(autoincrement())
-  application   JobApplications @relation(fields: [applicationId], references: [id], onDelete: Cascade)
-  applicationId Int
-  skill         String
+  jobOpportunity   JobOpportunities @relation(fields: [jobOpportunityId], references: [id], onDelete: Cascade)
+  jobOpportunityId Int // Foreign key
 }
 
 model Event {

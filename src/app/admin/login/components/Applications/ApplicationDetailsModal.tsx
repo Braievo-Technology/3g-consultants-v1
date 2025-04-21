@@ -127,12 +127,13 @@ export const ApplicationDetailsModal: React.FC<
                   </h4>
                   <div className="space-y-2">
                     <a
-                        href={`/uploads/${application.cv_name}`}
+                        href={`/assets/cv/${application.cv_name}`}
+                        download
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center rounded-md bg-[#f1c233] px-3 py-2 text-sm text-white hover:bg-[#f1c233]/80"
                     >
-                      <FileTextIcon size={16} className="mr-2 text-white" />
+                      <FileTextIcon size={16} className="mr-2 text-white"/>
                       View CV
                     </a>
                   </div>
