@@ -13,6 +13,7 @@ export function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/admin/login', request.url))
         }
     }
+    //test
 
     return NextResponse.next()
 }
