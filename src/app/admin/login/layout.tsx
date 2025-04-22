@@ -1,6 +1,6 @@
 // app/layout.tsx
-import "./globals.css";
-// import Sidebar from "@/app/admin/login/components/Layout/Sidebar"; // Adjust path as needed
+import "tailwindcss";
+import Sidebar from "@/app/admin/login/components/Layout/Sidebar"; // Adjust path as needed
 
 export const metadata = {
   title: "My App",
@@ -15,8 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex h-screen">
-        {/* <Sidebar /> */}
         <main className="flex-1 p-6 overflow-y-auto bg-gray-100">
+          <Sidebar />
           {children}
         </main>
       </body>
