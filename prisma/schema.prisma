@@ -24,6 +24,7 @@ model Project {
   budget       Decimal?
   status       ProjectStatus
   description  String?
+  category     Category
   images       ProjectImages[]
 }
 
@@ -77,6 +78,12 @@ model Event {
   images      EventImages[]
 }
 
+model user {
+  id       Int    @id @default(autoincrement())
+  userName String @unique
+  password String
+}
+
 model EventImages {
   id         Int    @id @default(autoincrement())
   event      Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
@@ -118,4 +125,13 @@ enum EventStatus {
   upcoming
   active
   completed
+}
+
+enum Category {
+  PROCUREMENT_AND_CONTRACTS
+  HIGHWAYS_AND_TRANSPORTATION_ENGINEERING
+  WATER_RESOURCES_ENGINEERING
+  ENVIRONMENTAL_AND_CLIMATE_RESILIENCE_ENGINEERING
+  URBAN_RURAL_AND_REGIONAL_DEVELOPMENT
+  COMMERCIAL_AND_HOUSING_DEVELOPMENT
 }

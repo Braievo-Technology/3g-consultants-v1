@@ -26,11 +26,11 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         const budget = formData.get('budget') as string;
         const status = formData.get('status') as string;
         const description = formData.get('description') as string;
+        const category = formData.get('category') as string;
 
         const files = formData.getAll('images');
         const savedImagePaths: { image_name: string }[] = [];
 
-        // Check if images are provided, then upload them
         const uploadDir = path.join(process.cwd(), 'public/assets/projectImages');
         if (!existsSync(uploadDir)) {
             mkdirSync(uploadDir, { recursive: true });
@@ -43,10 +43,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
                 const filePath = path.join(uploadDir, fileName);
 
                 await writeFile(filePath, buffer);
-
-                savedImagePaths.push({
-                    image_name: `/assets/projectImages/${fileName}`,
-                });
+                savedImagePaths.push({ image_name: `/assets/projectImages/${fileName}` });
             }
         }
 
@@ -60,8 +57,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
                 budget: budget ? parseFloat(budget) : undefined,
                 status,
                 description,
+                category, // must match enum in Prisma schema
                 images: {
-                    create: savedImagePaths,
+                    create: savedImagePaths, // Add new images
                 },
             },
             include: { images: true },
@@ -69,7 +67,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
         return NextResponse.json(updatedProject);
     } catch (error) {
-        console.error('Project FormData PUT error:', error);
+        console.error('Project PUT error:', error);
         return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
     }
 }
