@@ -1,13 +1,14 @@
+'use client'
 import React from 'react'
-import HeroSection from '@/components/home/HeroSection'
-import ServicesSection from '@/components/home/ServicesSection'
-import FeaturedProjects from '@/components/home/FeaturedProjects'
-import AboutPreview from '@/components/home/AboutPreview'
-import TestimonialsSection from '@/components/home/TestimonialsSection'
-import CtaSection from '@/components/home/CtaSection'
-import NewsPreviewSection from '@/components/home/NewsPreviewSection'
-import EventsPreviewSection from '@/components/home/EventsPreviewSection'
-export const metadata = {
+import HeroSection from '@/app/Components/home/HeroSection'
+import ServicesSection from '@/app/Components/home/ServicesSection'
+import FeaturedProjects from '@/app/Components/home/FeaturedProjects'
+import AboutPreview from '@/app/Components/home/AboutPreview'
+import TestimonialsSection from '@/app/Components/home/TestimonialsSection'
+import CtaSection from '@/app/Components/home/CtaSection'
+import NewsPreviewSection from '@/app/Components/home/NewsPreviewSection'
+import EventsPreviewSection from '@/app/Components/home/EventsPreviewSection'
+const metadata = {
   title: '3G Consultants | Engineering Excellence',
   description:
     "Engineering Excellence for Tomorrow's World. 3G Consultants delivers innovative engineering solutions with precision, expertise, and sustainable practices.",
