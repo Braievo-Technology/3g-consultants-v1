@@ -22,6 +22,7 @@ export default function RootLayout({
             <Link href="/admin/login/pages/job-opportunities" style={{ marginRight: '1rem' }}>Job Opportunities</Link>
             <Link href="/admin/login/pages/news-feed" style={{ marginRight: '1rem' }}>News Feed</Link>
             <Link href="/admin/login/pages/projects" style={{ marginRight: '1rem' }}>Project</Link>
+            <Link href="/admin/login/pages/GenerateDocument" style={{ marginRight: '1rem' }}>GenerateDocument</Link>
 
         </nav>
         <main>{children}</main>
