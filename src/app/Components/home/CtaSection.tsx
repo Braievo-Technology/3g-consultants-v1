@@ -1,7 +1,8 @@
-import React from 'react';
-import Button from '@/app/Components/ui/Button';
+import React from "react";
+import Button from "@/app/Components/ui/Button";
 const CtaSection = () => {
-  return <section className="py-16 bg-yellow-500">
+  return (
+    <section className="py-16 bg-yellow-500">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
           Ready to Start Your Next Project?
@@ -11,14 +12,19 @@ const CtaSection = () => {
           to life with our expertise in construction and engineering.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button href="/contact" variant="primary">
+          <Button href="/contactpage" variant="primary">
             Get In Touch
           </Button>
-          <Button href="/projects" variant="outline" className="border-black text-vlack hover:bg-black hover:text-white">
+          <Button
+            href="/projects"
+            variant="outline"
+            className="border-black text-vlack hover:bg-black hover:text-white"
+          >
             View Our Work
           </Button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 export default CtaSection;

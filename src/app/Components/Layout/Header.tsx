@@ -1,96 +1,96 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation'
+"use client";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import {
   MenuIcon,
   X as CloseIcon,
   PhoneIcon,
   MailIcon,
   ClockIcon,
-} from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import BrandText from '@/app/Components/ui/BrandText'
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import BrandText from "@/app/Components/ui/BrandText";
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [hasScrolled, setHasScrolled] = useState(false)
-  const pathname = usePathname()
-const router = useRouter()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
   useEffect(() => {
     const handleScroll = () => {
-      setHasScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setHasScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const handleNavClick = (sectionId: string, path: string) => {
-    setIsMenuOpen(false)
-    if (location.pathname === '/' && sectionId) {
-      const element = document.getElementById(sectionId)
+    setIsMenuOpen(false);
+    if (location.pathname === "/" && sectionId) {
+      const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({
-          behavior: 'smooth',
-        })
+          behavior: "smooth",
+        });
       }
-      return
+      return;
     }
-    if (location.pathname !== '/' && sectionId) {
-        router.push('/')
+    if (location.pathname !== "/" && sectionId) {
+      router.push("/");
       setTimeout(() => {
-        const element = document.getElementById(sectionId)
+        const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({
-            behavior: 'smooth',
-          })
+            behavior: "smooth",
+          });
         }
-      }, 100)
-      return
+      }, 100);
+      return;
     }
     if (path && !sectionId) {
-        router.push(path)
+      router.push(path);
     }
-  }
+  };
   const navItems = [
     {
-      label: 'Home',
-      sectionId: 'hero',
-      path: '/',
+      label: "Home",
+      sectionId: "hero",
+      path: "/",
     },
     {
-      label: 'About',
-      sectionId: 'about',
-      path: '/about',
+      label: "About",
+      sectionId: "about",
+      path: "/about",
     },
     {
-      label: 'Services',
-      sectionId: 'services',
-      path: '/services',
+      label: "Services",
+      sectionId: "services",
+      path: "/services",
     },
     {
-      label: 'Projects',
-      sectionId: 'projects',
-      path: '/projects',
+      label: "Projects",
+      sectionId: "projects",
+      path: "/projects",
     },
     {
-      label: 'News',
-      sectionId: 'news',
-      path: '/news',
+      label: "News",
+      sectionId: "news",
+      path: "/news",
     },
     {
-      label: 'Events',
-      sectionId: 'events',
-      path: '/events',
+      label: "Events",
+      sectionId: "events",
+      path: "/events",
     },
     {
-      label: 'Careers',
-      path: '/careers',
+      label: "Careers",
+      path: "../careerspage",
     },
     {
-      label: 'Contact',
-      sectionId: 'contact',
-      path: '/contact',
+      label: "Contact",
+      sectionId: "contact",
+      path: "/contact",
     },
-  ]
+  ];
   const headerVariants = {
     initial: {
       y: -100,
@@ -100,7 +100,7 @@ const router = useRouter()
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 100,
         damping: 20,
       },
@@ -109,13 +109,13 @@ const router = useRouter()
       y: -100,
       opacity: 0,
     },
-  }
+  };
   const mobileMenuVariants = {
     closed: {
       opacity: 0,
-      x: '100%',
+      x: "100%",
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 300,
         damping: 35,
       },
@@ -124,12 +124,12 @@ const router = useRouter()
       opacity: 1,
       x: 0,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 300,
         damping: 35,
       },
     },
-  }
+  };
   const navItemVariants = {
     closed: {
       opacity: 0,
@@ -140,15 +140,15 @@ const router = useRouter()
       y: 0,
       transition: {
         delay: i * 0.1,
-        type: 'spring',
+        type: "spring",
         stiffness: 300,
         damping: 35,
       },
     }),
-  }
+  };
   return (
     <header className="sticky top-0 w-full z-50">
-      <motion.div
+      <div
         initial="initial"
         animate="animate"
         variants={headerVariants}
@@ -170,9 +170,11 @@ const router = useRouter()
             <span className="text-sm">Mon - Fri: 8:00AM - 5:00PM</span>
           </div>
         </div>
-      </motion.div>
+      </div>
       <div
-        className={`bg-black shadow-md transition-all duration-300 ${hasScrolled ? 'rounded-b-2xl' : ''}`}
+        className={`bg-black shadow-md transition-all duration-300 ${
+          hasScrolled ? "rounded-b-2xl" : ""
+        }`}
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
@@ -181,7 +183,7 @@ const router = useRouter()
                 scale: 1.05,
               }}
               transition={{
-                type: 'spring',
+                type: "spring",
                 stiffness: 300,
                 damping: 20,
               }}
@@ -210,7 +212,7 @@ const router = useRouter()
                   whileHover={{
                     scale: 1.1,
                     transition: {
-                      type: 'spring',
+                      type: "spring",
                       stiffness: 400,
                       damping: 10,
                     },
@@ -280,7 +282,7 @@ const router = useRouter()
                   whileHover={{
                     scale: 1.1,
                     transition: {
-                      type: 'spring',
+                      type: "spring",
                       stiffness: 400,
                       damping: 10,
                     },
@@ -294,6 +296,6 @@ const router = useRouter()
         )}
       </AnimatePresence>
     </header>
-  )
-}
-export default Header
+  );
+};
+export default Header;

@@ -13,6 +13,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "lucide-react";
+import SectionTitle from "../ui/SectionTitle";
 const services = [
   {
     id: "procurement and contracts",
@@ -118,7 +119,7 @@ const ServiceCard = ({ service }: { service: (typeof services)[0] }) => {
         perspective: "1000px",
       }}
     >
-      <Link href="/services" className="block h-full">
+      <Link href="/servicespage" className="block h-full">
         <motion.div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -284,11 +285,16 @@ const ServicesSection = () => {
   };
   return (
     <section
-      className="relative h-screen w-full overflow-hidden flex items-center"
+      className="relative h-screen w-full overflow-hidden flex flex-col items-center"
       style={{
-        backgroundColor: "#000000",
+        backgroundColor: "black",
       }}
     >
+      <SectionTitle
+        title="Our Services"
+        subtitle="Explore our comprehensive range of engineering and construction solutions"
+        centered={true}
+      />
       <motion.div
         className="absolute inset-0 z-0"
         animate={{

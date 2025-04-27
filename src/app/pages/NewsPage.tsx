@@ -1,17 +1,16 @@
-"use client"
-import React from 'react'
-import Link from 'next/link';
-import SectionTitle from '@/app/Components/ui/SectionTitle'
-import { CalendarIcon, ClockIcon, ArrowRightIcon } from 'lucide-react'
-import { useNews } from '@/app/hooks/useNews'
+import React from "react";
+import { Link } from "react-router-dom";
+import SectionTitle from "../components/ui/SectionTitle";
+import { CalendarIcon, ClockIcon, ArrowRightIcon } from "lucide-react";
+import { useNews } from "../hooks/useNews";
 const NewsPage = () => {
-  const { news, loading, error } = useNews()
+  const { news, loading, error } = useNews();
   if (loading) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center">
         <div className="text-xl text-gray-600">Loading news...</div>
       </div>
-    )
+    );
   }
   if (error) {
     return (
@@ -20,10 +19,10 @@ const NewsPage = () => {
           Error loading news: {error.message}
         </div>
       </div>
-    )
+    );
   }
   // Filter only published news
-  const publishedNews = news.filter((item) => item.status === 'published')
+  const publishedNews = news.filter((item) => item.status === "published");
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -84,6 +83,6 @@ const NewsPage = () => {
         </div>
       </section>
     </div>
-  )
-}
-export default NewsPage
+  );
+};
+export default NewsPage;

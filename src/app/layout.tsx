@@ -1,50 +1,46 @@
-import React from 'react'
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Header from '@/app/Components/Layout/Header'
-import Footer from '@/app/Components/Layout/Footer'
+import React from "react";
+import "./globals.css";
+import { Inter } from "next/font/google";
 const inter = Inter({
-  subsets: ['latin'],
-})
+  subsets: ["latin"],
+});
 export const metadata = {
-  title: '3G Consultants | Engineering Excellence',
+  title: "3G Consultants | Engineering Excellence",
   description:
     "Engineering Excellence for Tomorrow's World. 3G Consultants delivers innovative engineering solutions with precision, expertise, and sustainable practices.",
   keywords: [
-    'engineering',
-    'construction',
-    'consulting',
-    'infrastructure',
-    'sustainable engineering',
-    'project management',
+    "engineering",
+    "construction",
+    "consulting",
+    "infrastructure",
+    "sustainable engineering",
+    "project management",
   ],
   authors: [
     {
-      name: '3G Consultants',
+      name: "3G Consultants",
     },
   ],
-  creator: '3G Consultants',
-  publisher: '3G Consultants',
+  creator: "3G Consultants",
+  publisher: "3G Consultants",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-}
+};
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body
         className={`${inter.className} flex flex-col min-h-screen bg-gray-50`}
       >
-        <Header />
         <main className="flex-grow">{children}</main>
-        <Footer />
       </body>
     </html>
-  )
+  );
 }

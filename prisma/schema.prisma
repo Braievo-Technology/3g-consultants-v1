@@ -24,6 +24,7 @@ model Project {
   budget       Decimal?
   status       ProjectStatus
   description  String?
+  category     Category
   images       ProjectImages[]
 }
 
@@ -44,10 +45,12 @@ model JobOpportunities {
   status               JobStatus
   job_description      String?
   requirements         String?
+
+  applications JobApplications[] // 1-to-many relation
 }
 
 model JobApplications {
-  id              Int                    @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   name            String
   email           String
   contact         String?
@@ -55,14 +58,10 @@ model JobApplications {
   expected_salary Decimal?
   cv_name         String?
   cover_letter    String?
-  skills          JobApplicationSkills[]
-}
+  skills          String
 
-model JobApplicationSkills {
-  id            Int             @id @default(autoincrement())
-  application   JobApplications @relation(fields: [applicationId], references: [id], onDelete: Cascade)
-  applicationId Int
-  skill         String
+  jobOpportunity   JobOpportunities @relation(fields: [jobOpportunityId], references: [id], onDelete: Cascade)
+  jobOpportunityId Int // Foreign key
 }
 
 model Event {
@@ -77,6 +76,12 @@ model Event {
   status      EventStatus
   description String?
   images      EventImages[]
+}
+
+model user {
+  id       Int    @id @default(autoincrement())
+  userName String @unique
+  password String
 }
 
 model EventImages {
@@ -120,4 +125,13 @@ enum EventStatus {
   upcoming
   active
   completed
+}
+
+enum Category {
+  PROCUREMENT_AND_CONTRACTS
+  HIGHWAYS_AND_TRANSPORTATION_ENGINEERING
+  WATER_RESOURCES_ENGINEERING
+  ENVIRONMENTAL_AND_CLIMATE_RESILIENCE_ENGINEERING
+  URBAN_RURAL_AND_REGIONAL_DEVELOPMENT
+  COMMERCIAL_AND_HOUSING_DEVELOPMENT
 }

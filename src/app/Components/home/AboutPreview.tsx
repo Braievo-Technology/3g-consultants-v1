@@ -234,7 +234,7 @@ const AboutPreview = () => {
                 delay: 0.6,
               }}
             >
-              <Button href="/about/AboutPage" variant="secondary">
+              <Button href="/about" variant="secondary">
                 Discover Our Story
               </Button>
             </motion.div>
