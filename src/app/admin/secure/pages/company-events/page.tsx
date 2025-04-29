@@ -1,5 +1,5 @@
 'use client'
-import { eventService, Event as ApiEvent } from '@/app/admin/login/services/eventService'
+import { eventService, Event as ApiEvent } from '@/app/admin/secure/services/eventService'
 import {
     MapPinIcon,
     CalendarIcon,
@@ -12,11 +12,11 @@ import {
 } from 'lucide-react'
 
 import React, {useEffect, useState} from "react";
-import {PageTransition} from "@/app/admin/login/components/UI/PageTransition";
-import {AddButton} from "@/app/admin/login/components/UI/AddButton";
-import {Modal} from "@/app/admin/login/components/UI/Modal";
-import {EventForm} from "@/app/admin/login/components/Events/EventForm";
-import {Badge} from "@/app/admin/login/components/UI/Badge";
+import {PageTransition} from "@/app/admin/secure/components/UI/PageTransition";
+import {AddButton} from "@/app/admin/secure/components/UI/AddButton";
+import {Modal} from "@/app/admin/secure/components/UI/Modal";
+import {EventForm} from "@/app/admin/secure/components/Events/EventForm";
+import {Badge} from "@/app/admin/secure/components/UI/Badge";
 
 interface Event {
     id: number

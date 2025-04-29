@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Sidebar } from "./Sidebar";
+import Sidebar from "./Sidebar";
 import { Header } from "./Header";
 interface LayoutProps {
   children: React.ReactNode;

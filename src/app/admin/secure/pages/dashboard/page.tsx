@@ -12,16 +12,16 @@ import { useEffect, useState } from "react";
 import {
   DashboardSummary,
   summaryService,
-} from "@/app/admin/login/services/summary";
-import { PageTransition } from "@/app/admin/login/components/UI/PageTransition";
-import { StatsCard } from "@/app/admin/login/components/UI/StatsCard";
-import { ActionButton } from "@/app/admin/login/components/UI/ActionButton";
-import { ActivityItem } from "@/app/admin/login/components/UI/ActivityItem";
-import { ContentCard } from "@/app/admin/login/components/UI/ContentCard";
+} from "@/app/admin/secure/services/summary";
+import { PageTransition } from "@/app/admin/secure/components/UI/PageTransition";
+import { StatsCard } from "@/app/admin/secure/components/UI/StatsCard";
+import { ActionButton } from "@/app/admin/secure/components/UI/ActionButton";
+import { ActivityItem } from "@/app/admin/secure/components/UI/ActivityItem";
+import { ContentCard } from "@/app/admin/secure/components/UI/ContentCard";
 import {
   popularContentData,
   recentActivityData,
-} from "@/app/admin/login/data/mockData";
+} from "@/app/admin/secure/data/mockData";
 import { router } from "next/client";
 
 const Dashboard: React.FC = () => {

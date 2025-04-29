@@ -1,13 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { NewsFeed } from "@prisma/client";
-import { newsFeedService } from "@/app/admin/login/services/newsFeedService";
-import { Badge } from "@/app/admin/login/components/UI/Badge";
-import { PageTransition } from "@/app/admin/login/components/UI/PageTransition";
-import { AddButton } from "@/app/admin/login/components/UI/AddButton";
-import { DataTable } from "@/app/admin/login/components/UI/DataTable";
-import { Modal } from "@/app/admin/login/components/UI/Modal";
-import { NewsForm } from "@/app/admin/login/components/News/NewsForm";
+import { newsFeedService } from "@/app/admin/secure/services/newsFeedService";
+import { Badge } from "@/app/admin/secure/components/UI/Badge";
+import { PageTransition } from "@/app/admin/secure/components/UI/PageTransition";
+import { AddButton } from "@/app/admin/secure/components/UI/AddButton";
+import { DataTable } from "@/app/admin/secure/components/UI/DataTable";
+import { Modal } from "@/app/admin/secure/components/UI/Modal";
+import { NewsForm } from "@/app/admin/secure/components/News/NewsForm";
+
+import {useRouter} from "next/navigation";
 
 const NewsFeedPage: React.FC = () => {
   const [news, setNews] = useState<NewsFeed[]>([]);
@@ -17,6 +19,19 @@ const NewsFeedPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const isAdmin = document.cookie.includes("admin-auth=true");
+      if (!isAdmin) {
+        router.replace("/admin"); // properly await
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
   const fetchNews = async () => {
     try {
       const data = await newsFeedService.getAllNews();

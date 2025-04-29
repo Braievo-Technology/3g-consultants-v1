@@ -1,6 +1,6 @@
 // app/layout.tsx
 import "tailwindcss";
-import Sidebar from "@/app/admin/login/components/Layout/Sidebar"; // Adjust path as needed
+import Sidebar from "@/app/admin/secure/components/Layout/Sidebar";
 
 export const metadata = {
   title: "My App",

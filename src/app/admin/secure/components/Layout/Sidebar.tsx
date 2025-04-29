@@ -22,32 +22,32 @@ export default function Sidebar() {
   const links = [
     {
       name: "Dashboard",
-      href: "/admin/login/pages/dashboard",
+      href: "/admin/secure/pages/dashboard",
       icon: <Home size={18} />,
     },
     {
       name: "Company Events",
-      href: "/admin/login/pages/company-events",
+      href: "/admin/secure/pages/company-events",
       icon: <Calendar size={18} />,
     },
     {
       name: "Job Application",
-      href: "/admin/login/pages/job-applications",
+      href: "/admin/secure/pages/job-applications",
       icon: <Users size={18} />,
     },
     {
       name: "Job Opportunities",
-      href: "/admin/login/pages/job-opportunities",
+      href: "/admin/secure/pages/job-opportunities",
       icon: <Briefcase size={18} />,
     },
     {
       name: "News Feed",
-      href: "/admin/login/pages/news-feed",
+      href: "/admin/secure/pages/news-feed",
       icon: <Newspaper size={18} />,
     },
     {
       name: "Project",
-      href: "/admin/login/pages/projects",
+      href: "/admin/secure/pages/projects",
       icon: <Folder size={18} />,
     },
   ];

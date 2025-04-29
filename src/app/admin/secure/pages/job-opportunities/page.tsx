@@ -2,12 +2,12 @@
 import {useEffect, useState} from "react";
 import { jobService, Job as ApiJob } from '../../services/jobService'
 import {CalendarIcon, MapPinIcon} from "lucide-react";
-import {Badge} from "@/app/admin/login/components/UI/Badge";
-import {PageTransition} from "@/app/admin/login/components/UI/PageTransition";
-import {AddButton} from "@/app/admin/login/components/UI/AddButton";
-import {DataTable} from "@/app/admin/login/components/UI/DataTable";
-import {Modal} from "@/app/admin/login/components/UI/Modal";
-import {JobForm} from "@/app/admin/login/components/Jobs/JobForm";
+import {Badge} from "@/app/admin/secure/components/UI/Badge";
+import {PageTransition} from "@/app/admin/secure/components/UI/PageTransition";
+import {AddButton} from "@/app/admin/secure/components/UI/AddButton";
+import {DataTable} from "@/app/admin/secure/components/UI/DataTable";
+import {Modal} from "@/app/admin/secure/components/UI/Modal";
+import {JobForm} from "@/app/admin/secure/components/Jobs/JobForm";
 const JobOpportunities: React.FC = () => {
     const [jobs, setJobs] = useState<ApiJob[]>([])
     const [filteredJobs, setFilteredJobs] = useState<ApiJob[]>([])

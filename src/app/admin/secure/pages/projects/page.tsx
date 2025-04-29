@@ -6,12 +6,14 @@ import {
     Project as ApiProject,
 } from '../../services/projectService'
 import {useEffect, useState} from "react";
-import {Badge} from "@/app/admin/login/components/UI/Badge";
-import {PageTransition} from "@/app/admin/login/components/UI/PageTransition";
-import {AddButton} from "@/app/admin/login/components/UI/AddButton";
-import {DataTable} from "@/app/admin/login/components/UI/DataTable";
-import {Modal} from "@/app/admin/login/components/UI/Modal";
-import {ProjectForm} from "@/app/admin/login/components/Projects/ProjectForm";
+import {Badge} from "@/app/admin/secure/components/UI/Badge";
+
+import {AddButton} from "@/app/admin/secure/components/UI/AddButton";
+import {DataTable} from "@/app/admin/secure/components/UI/DataTable";
+import {Modal} from "@/app/admin/secure/components/UI/Modal";
+import {ProjectForm} from "@/app/admin/secure/components/Projects/ProjectForm";
+import { PageTransition } from '../../components/UI/PageTransition';
+
 
 interface Project {
     id: number

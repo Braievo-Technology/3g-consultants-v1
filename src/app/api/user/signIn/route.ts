@@ -19,7 +19,20 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
         }
 
-        return NextResponse.json({ message: 'Signed in', user: { id: user.id, userName: user.userName } });
+        const response = NextResponse.json({
+            message: 'Signed in',
+            user: { id: user.id, userName: user.userName }
+        });
+
+        response.cookies.set('admin-auth', 'true', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            path: '/',
+            maxAge: 60 * 60,
+        });
+
+        return response;
     } catch (error) {
         console.error('Signin error:', error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

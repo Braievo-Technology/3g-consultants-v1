@@ -5,12 +5,13 @@ import {
   JobApplication,
   jobApplicationService,
   JobApplicationSkill,
-} from "@/app/admin/login/services/jobApplicationService";
+} from "@/app/admin/secure/services/jobApplicationService";
 import { UserIcon } from "lucide-react";
-import { PageTransition } from "@/app/admin/login/components/UI/PageTransition";
-import { DataTable } from "@/app/admin/login/components/UI/DataTable";
-import { Modal } from "@/app/admin/login/components/UI/Modal";
-import { ApplicationDetailsModal } from "@/app/admin/login/components/Applications/ApplicationDetailsModal";
+
+import { DataTable } from "@/app/admin/secure/components/UI/DataTable";
+import { Modal } from "@/app/admin/secure/components/UI/Modal";
+import { ApplicationDetailsModal } from "@/app/admin/secure/components/Applications/ApplicationDetailsModal";
+import { PageTransition } from "../../components/UI/PageTransition";
 
 const JobApplications: React.FC = () => {
   const [applications, setApplications] = useState<JobApplication[]>([]);
