@@ -50,6 +50,11 @@ export default function Sidebar() {
       href: "/admin/secure/pages/projects",
       icon: <Folder size={18} />,
     },
+    {
+      name: "Generate Documents",
+      href: "/admin/secure/pages/GenerateDocument",
+      icon: <Folder size={18} />,
+    },
   ];
 
   return (
