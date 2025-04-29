@@ -1,4 +1,17 @@
 import api from './api'
+export enum ProjectStatus {
+    Planning = "Planning",
+    inprogress = "inprogress", // Updated to match backend enum
+    completed = "completed",    // Updated to match backend enum
+    on_hold = "on_hold"        // Updated to match backend enum
+}
+export type ProjectCategory =
+    | 'PROCUREMENT_AND_CONTRACTS'
+    | 'HIGHWAYS_AND_TRANSPORTATION_ENGINEERING'
+    | 'WATER_RESOURCES_ENGINEERING'
+    | 'ENVIRONMENTAL_AND_CLIMATE_RESILIENCE_ENGINEERING'
+    | 'URBAN_RURAL_AND_REGIONAL_DEVELOPMENT'
+    | 'COMMERCIAL_AND_HOUSING_DEVELOPMENT'
 export interface ProjectImage {
     id?: number
     projectId?: number
@@ -11,8 +24,9 @@ export interface Project {
     location: string
     start_date: Date
     end_date: Date
-    status: string
+    status: ProjectStatus
     budget: number
+    category: ProjectCategory
     images: ProjectImage[]
 }
 export interface CreateProjectDTO {
@@ -21,8 +35,9 @@ export interface CreateProjectDTO {
     location: string
     start_date: Date
     end_date: Date
-    status: string
+    status: ProjectStatus
     budget: number
+    category: ProjectCategory
     images: File[]
 }
 export const projectService = {
@@ -44,9 +59,12 @@ export const projectService = {
             formData.append('budget', project.budget.toString())
             formData.append('status', project.status)
             formData.append('description', project.description)
-            project.images.forEach((file: File) => {
-                formData.append('images', file)
-            })
+            formData.append('category', project.category)
+            if (project.images) {
+                project.images.forEach((file: File) => {
+                    formData.append('images', file)
+                })
+            }
             const response = await api.post<Project>('/project', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -68,6 +86,7 @@ export const projectService = {
             formData.append('budget', project.budget.toString())
             formData.append('status', project.status)
             formData.append('description', project.description)
+            formData.append('category', project.category)
             project.images.forEach((file: File) => {
                 formData.append('images', file)
             })

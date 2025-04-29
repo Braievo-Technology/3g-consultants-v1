@@ -1,19 +1,19 @@
 'use client'
+import React, { useEffect, useState } from 'react'
+
 import { MapPinIcon } from 'lucide-react'
 import { CalendarIcon } from 'lucide-react'
 import {
     projectService,
     Project as ApiProject,
 } from '../../services/projectService'
-import {useEffect, useState} from "react";
+import {ProjectStatus} from "@prisma/client";
 import {Badge} from "@/app/admin/secure/components/UI/Badge";
-
+import {PageTransition} from "@/app/admin/secure/components/UI/PageTransition";
 import {AddButton} from "@/app/admin/secure/components/UI/AddButton";
 import {DataTable} from "@/app/admin/secure/components/UI/DataTable";
 import {Modal} from "@/app/admin/secure/components/UI/Modal";
 import {ProjectForm} from "@/app/admin/secure/components/Projects/ProjectForm";
-import { PageTransition } from '../../components/UI/PageTransition';
-
 
 interface Project {
     id: number
@@ -25,6 +25,7 @@ interface Project {
     status: string
     budget?: string
     images?: string[]
+    category?: string
 }
 const Projects: React.FC = () => {
     const [projects, setProjects] = useState<ApiProject[]>([])
@@ -66,11 +67,12 @@ const Projects: React.FC = () => {
                 project_name: data.name,
                 description: data.description,
                 location: data.location,
-                start_date: new Date(data.startDate),
-                end_date: new Date(data.endDate),
+                start_date: data.startDate,
+                end_date: data.endDate,
                 status: data.status,
-                budget: parseFloat(data.budget),
-                images: data.images,
+                budget: data.budget ? parseFloat(data.budget) : 0,
+                category: data.category,
+                images: data.images || [],
             }
             await projectService.createProject(formattedData)
             await fetchProjects()
@@ -92,6 +94,7 @@ const Projects: React.FC = () => {
                 end_date: new Date(data.endDate),
                 status: data.status,
                 budget: parseFloat(data.budget),
+                category: data.category,
                 images: data.images,
             }
             await projectService.updateProject(editingProject.id, formattedData)
@@ -124,19 +127,25 @@ const Projects: React.FC = () => {
         setEditingProject(project)
         setIsModalOpen(true)
     }
-    const getBadgeColor = (status: string) => {
-        switch (status.toLowerCase()) {
-            case 'planning':
+    const getBadgeColor = (status: ProjectStatus) => {
+        switch (status) {
+            case ProjectStatus.Planning:
                 return 'blue'
-            case 'in-progress':
+            case ProjectStatus.inprogress:
                 return 'yellow'
-            case 'completed':
+            case ProjectStatus.completed:
                 return 'green'
-            case 'on-hold':
+            case ProjectStatus.on_hold:
                 return 'gray'
             default:
                 return 'gray'
         }
+    }
+    const formatCategoryDisplay = (category: string) => {
+        return category
+            .split('_')
+            .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
+            .join(' ')
     }
     const columns = [
         {
@@ -218,6 +227,16 @@ const Projects: React.FC = () => {
                 </div>
             ),
         },
+        {
+            key: 'category',
+            header: 'Category',
+            width: '15%',
+            render: (value: string) => (
+                <div className="text-sm text-gray-600">
+                    {formatCategoryDisplay(value)}
+                </div>
+            ),
+        },
     ]
     return (
         <PageTransition>
@@ -242,19 +261,19 @@ const Projects: React.FC = () => {
                             options: [
                                 {
                                     label: 'Planning',
-                                    value: 'Planning',
+                                    value: ProjectStatus.Planning,
                                 },
                                 {
                                     label: 'In Progress',
-                                    value: 'In-progress',
+                                    value: ProjectStatus.inprogress,
                                 },
                                 {
                                     label: 'Completed',
-                                    value: 'Completed',
+                                    value: ProjectStatus.completed,
                                 },
                                 {
                                     label: 'On Hold',
-                                    value: 'On-hold',
+                                    value: ProjectStatus.on_hold,
                                 },
                             ],
                         }}

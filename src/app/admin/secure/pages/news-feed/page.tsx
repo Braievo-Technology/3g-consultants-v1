@@ -21,7 +21,7 @@ const NewsFeedPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
+/*  useEffect(() => {
     const checkAuth = async () => {
       const isAdmin = document.cookie.includes("admin-auth=true");
       if (!isAdmin) {
@@ -30,7 +30,7 @@ const NewsFeedPage: React.FC = () => {
     };
 
     checkAuth();
-  }, [router]);
+  }, [router]);*/
 
   const fetchNews = async () => {
     try {
