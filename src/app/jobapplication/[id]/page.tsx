@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, Fragment } from "react";
-import { useRouter, useParams } from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import { motion } from "framer-motion";
 import {
   CheckCircleIcon,
@@ -12,14 +12,11 @@ import {
 } from "lucide-react";
 import Button from "@/app/Components/ui/Button";
 import { jobService } from "../../services/api/jobService";
-// import { jobApplicationService } from "@/app/services/api/jobApplicationService.js";
 import { CreateJobApplicationDTO } from "../../types/jobApplication";
 import { jobApplicationService } from "../../services/api/jobApplicationService";
-// import { jobApplicationService } from "../services/api/jobApplicationService";
-// import { jobService } from "../services/api/jobService.ts";
-// import { CreateJobApplicationDTO } from "../types/jobApplication.ts";
+
 interface FormData {
-  // Personal Details
+
   firstName: string;
   lastName: string;
   email: string;
@@ -27,26 +24,21 @@ interface FormData {
   location: string;
   education: string;
   skills: string[];
-  // Application Questions
   whyJoin: string;
   relevantExperience: string;
   expectedSalary: string;
-  // CV Upload
   cv: File | null;
   coverLetter: File | null;
 }
 const jobOpenings = await jobService.getAllJobs();
 const JobApplicationPage = () => {
-  //const { jobId } = useParams();
-  const { jobId } = useParams();
+  const router = useRouter();
+  const  jobId  = useParams();
   console.log(jobId, "params job id");
   console.log(jobId, "Job ID", jobOpenings, "Job opening");
-  // const navigate = useNavigate();
-  // Find the job from static data
-  // const finalId = jobId.id;
-  // console.log(finalId, "Final Id Debugging");
+
   const job = jobOpenings.find((job) => job.id === Number(jobId.id));
-  // If job not found, show error
+
   console.log(job, "Dibugging job details");
 
   if (!job) {
@@ -56,7 +48,7 @@ const JobApplicationPage = () => {
         <p className="mb-8">
           The job posting you're looking for doesn't exist or has been removed.
         </p>
-        <Button href="/careers" variant="secondary">
+        <Button href="/careerspage" variant="secondary">
           View All Jobs
         </Button>
       </div>
@@ -140,7 +132,7 @@ const JobApplicationPage = () => {
       };
       await jobApplicationService.createJobApplication(applicationData);
       // Show success message and redirect
-      navigate("/careers");
+      router.push('/careerspage');
     } catch (error) {
       console.error("Error submitting application:", error);
       // Handle error - show error message to user
@@ -426,7 +418,7 @@ const JobApplicationPage = () => {
       <div className="bg-blue-900 py-12">
         <div className="container mx-auto px-4">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => router.push("/careerspage")}
             className="text-white flex items-center hover:underline"
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" />

@@ -46,7 +46,7 @@ model JobOpportunities {
   job_description      String?
   requirements         String?
 
-  applications JobApplications[] // 1-to-many relation
+  applications JobApplications[]
 }
 
 model JobApplications {

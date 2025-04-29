@@ -14,6 +14,7 @@ import {
 import SectionTitle from "../Components/ui/SectionTitle";
 import Button from "../Components/ui/Button";
 import { useJobs } from "../hooks/useJobs";
+import {Job} from "@/app/types/job";
 const employmentTypes = [
   "All",
   "Full Time",
