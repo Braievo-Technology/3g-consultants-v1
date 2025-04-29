@@ -26,11 +26,11 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         const budget = formData.get('budget') as string;
         const status = formData.get('status') as string;
         const description = formData.get('description') as string;
+        const category = formData.get('category') as string; // <-- category added here
 
         const files = formData.getAll('images');
         const savedImagePaths: { image_name: string }[] = [];
 
-        // Check if images are provided, then upload them
         const uploadDir = path.join(process.cwd(), 'public/assets/projectImages');
         if (!existsSync(uploadDir)) {
             mkdirSync(uploadDir, { recursive: true });
@@ -60,6 +60,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
                 budget: budget ? parseFloat(budget) : undefined,
                 status,
                 description,
+                category, // <-- pass category to update
                 images: {
                     create: savedImagePaths,
                 },
@@ -73,6 +74,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
     }
 }
+
 
 
 export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
