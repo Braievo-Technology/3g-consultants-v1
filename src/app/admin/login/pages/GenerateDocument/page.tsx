@@ -1,13 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import { MapPinIcon, Loader2Icon } from 'lucide-react'
+
+import { MapPinIcon, Loader2Icon, FileTextIcon } from 'lucide-react'
 import axios from 'axios'
+
 import {Project} from "@prisma/client";
-import {downloadGeneratedFile, generateDocument} from "@/app/admin/login/services/generateService";
+import {generateDocument} from "@/app/admin/login/services/generateService";
 import {PageTransition} from "@/app/admin/login/components/UI/PageTransition";
 import {CategorySelect} from "@/app/admin/login/components/UI/CategorySelect";
-
 
 const GenerateDocument: React.FC = () => {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([])
@@ -18,6 +19,9 @@ const GenerateDocument: React.FC = () => {
     const [isGenerating, setIsGenerating] = useState(false)
     const [error, setError] = useState('')
     const [isDownloading, setIsDownloading] = useState(false)
+    const [generatedFilePath, setGeneratedFilePath] = useState<string | null>(
+        null,
+    )
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentDateTime(new Date())
@@ -65,16 +69,7 @@ const GenerateDocument: React.FC = () => {
                 projects,
             })
             if (response.filePath) {
-                setIsDownloading(true)
-                try {
-                    await downloadGeneratedFile(response.filePath)
-                    alert('Document downloaded successfully!')
-                } catch (err) {
-                    alert('Failed to download document. Please try again.')
-                    console.error('Error downloading document:', err)
-                } finally {
-                    setIsDownloading(false)
-                }
+                setGeneratedFilePath(response.filePath)
             }
         } catch (err) {
             alert('Failed to generate document. Please try again.')
@@ -138,31 +133,38 @@ const GenerateDocument: React.FC = () => {
                         </div>
                     </div>
                     <div className="mb-8">
-                        <button
-                            onClick={handleGenerateFile}
-                            disabled={
-                                isLoading ||
-                                isGenerating ||
-                                isDownloading ||
-                                selectedCategories.length === 0 ||
-                                !clientName.trim()
-                            }
-                            className="inline-flex items-center rounded-md bg-[#f1c233] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#f1c233]/90 focus:outline-none focus:ring-2 focus:ring-[#f1c233] focus:ring-offset-2 disabled:opacity-50"
-                        >
-                            {isGenerating ? (
-                                <>
-                                    <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
-                                    Generating...
-                                </>
-                            ) : isDownloading ? (
-                                <>
-                                    <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
-                                    Downloading...
-                                </>
-                            ) : (
-                                'Generate File'
-                            )}
-                        </button>
+                        <div className="flex gap-4 items-center">
+                            <button
+                                onClick={handleGenerateFile}
+                                disabled={
+                                    isLoading ||
+                                    isGenerating ||
+                                    selectedCategories.length === 0 ||
+                                    !clientName.trim()
+                                }
+                                className="inline-flex items-center rounded-md bg-[#f1c233] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#f1c233]/90 focus:outline-none focus:ring-2 focus:ring-[#f1c233] focus:ring-offset-2 disabled:opacity-50"
+                            >
+                                {isGenerating ? (
+                                    <>
+                                        <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+                                        Generating...
+                                    </>
+                                ) : (
+                                    'Generate File'
+                                )}
+                            </button>
+                            <a
+                                href={generatedFilePath ? `${generatedFilePath}` : '#'}
+                                download
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => !generatedFilePath && e.preventDefault()}
+                                className={`flex items-center rounded-md bg-[#f1c233] px-3 py-2 text-sm text-white hover:bg-[#f1c233]/80 ${!generatedFilePath ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                                <FileTextIcon size={16} className="mr-2 text-white" />
+                                Download Document
+                            </a>
+                        </div>
                     </div>
                     <div className="space-y-4">
                         {isLoading ? (
