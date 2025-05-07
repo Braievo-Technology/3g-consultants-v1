@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcrypt';
+import argon2 from 'argon2';
 
 export async function POST(req: NextRequest) {
     try {
@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
             where: { userName },
         });
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        // Validate user and compare password using argon2
+        if (!user || !(await argon2.verify(user.password, password))) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
         }
 
@@ -24,6 +25,7 @@ export async function POST(req: NextRequest) {
             user: { id: user.id, userName: user.userName }
         });
 
+        // Set cookie
         response.cookies.set('admin-auth', 'true', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

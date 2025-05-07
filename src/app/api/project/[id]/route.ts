@@ -1,21 +1,41 @@
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-import {existsSync, mkdirSync} from "fs";
-import path from "node:path";
-import {writeFile} from "fs/promises";
+import { existsSync, mkdirSync } from 'fs';
+import path from 'node:path';
+import { writeFile } from 'fs/promises';
 
 const prisma = new PrismaClient();
 
-export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
+// Utility to extract the ID from URL
+function extractIdFromUrl(req: NextRequest): number | null {
+    const idStr = req.nextUrl.pathname.split('/').pop();
+    return idStr ? Number(idStr) : null;
+}
+
+export async function GET(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
     const project = await prisma.project.findUnique({
-        where: { id: Number(params.id) },
-        include: { images: true }
+        where: { id },
+        include: { images: true },
     });
+
+    if (!project) {
+        return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+    }
 
     return NextResponse.json(project);
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
     try {
         const formData = await req.formData();
 
@@ -26,7 +46,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         const budget = formData.get('budget') as string;
         const status = formData.get('status') as string;
         const description = formData.get('description') as string;
-        const category = formData.get('category') as string; // <-- category added here
+        const category = formData.get('category') as string;
 
         const files = formData.getAll('images');
         const savedImagePaths: { image_name: string }[] = [];
@@ -43,15 +63,12 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
                 const filePath = path.join(uploadDir, fileName);
 
                 await writeFile(filePath, buffer);
-
-                savedImagePaths.push({
-                    image_name: `/assets/projectImages/${fileName}`,
-                });
+                savedImagePaths.push({ image_name: `/assets/projectImages/${fileName}` });
             }
         }
 
         const updatedProject = await prisma.project.update({
-            where: { id: Number(params.id) },
+            where: { id },
             data: {
                 project_name,
                 location,
@@ -60,7 +77,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
                 budget: budget ? parseFloat(budget) : undefined,
                 status,
                 description,
-                category, // <-- pass category to update
+                category,
                 images: {
                     create: savedImagePaths,
                 },
@@ -75,9 +92,17 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
 }
 
+export async function DELETE(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
 
-
-export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
-    await prisma.project.delete({ where: { id: Number(params.id) } });
-    return NextResponse.json({ message: 'Project deleted successfully' });
+    try {
+        await prisma.project.delete({ where: { id } });
+        return NextResponse.json({ message: 'Project deleted successfully' });
+    } catch (error) {
+        console.error('DELETE error:', error);
+        return NextResponse.json({ message: 'Failed to delete project' }, { status: 500 });
+    }
 }

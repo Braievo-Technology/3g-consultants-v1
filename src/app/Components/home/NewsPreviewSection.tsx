@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+
 import { motion } from "framer-motion";
-import { ArrowRightIcon } from "lucide-react";
+
 import SectionTitle from "@/app/Components/ui/SectionTitle";
 import Button from "@/app/Components/ui/Button";
 import { useNews } from "@/app/hooks/useNews";

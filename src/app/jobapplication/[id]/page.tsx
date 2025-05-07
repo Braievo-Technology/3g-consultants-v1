@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, Fragment } from "react";
+import React, {useState, Fragment, useEffect} from "react";
 import {useParams, useRouter} from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -14,6 +14,7 @@ import Button from "@/app/Components/ui/Button";
 import { jobService } from "../../services/api/jobService";
 import { CreateJobApplicationDTO } from "../../types/jobApplication";
 import { jobApplicationService } from "../../services/api/jobApplicationService";
+import {Job} from "@/app/types/job";
 
 interface FormData {
 
@@ -30,30 +31,10 @@ interface FormData {
   cv: File | null;
   coverLetter: File | null;
 }
-const jobOpenings = await jobService.getAllJobs();
 const JobApplicationPage = () => {
   const router = useRouter();
-  const  jobId  = useParams();
-  console.log(jobId, "params job id");
-  console.log(jobId, "Job ID", jobOpenings, "Job opening");
-
-  const job = jobOpenings.find((job) => job.id === Number(jobId.id));
-
-  console.log(job, "Dibugging job details");
-
-  if (!job) {
-    return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold text-blue-900 mb-4">Job Not Found</h1>
-        <p className="mb-8">
-          The job posting you're looking for doesn't exist or has been removed.
-        </p>
-        <Button href="/careerspage" variant="secondary">
-          View All Jobs
-        </Button>
-      </div>
-    );
-  }
+  const params = useParams();
+  const [job, setJob] = useState<never>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -75,6 +56,31 @@ const JobApplicationPage = () => {
     coverLetter: null,
   });
   const [newSkill, setNewSkill] = useState("");
+
+  useEffect(() => {
+    const fetchJob = async () => {
+      const jobOpenings = await jobService.getAllJobs();
+      const foundJob = jobOpenings.find((job: Job) => job.id === Number(params.id));
+      setJob(foundJob);
+    };
+
+    fetchJob();
+  }, [params.id]);
+
+  if (!job) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-3xl font-bold text-blue-900 mb-4">Job Not Found</h1>
+        <p className="mb-8">
+          The job posting you&#39;re looking for doesn&#39;t exist or has been removed.
+        </p>
+        <Button href="/careerspage" variant="secondary">
+          View All Jobs
+        </Button>
+      </div>
+    );
+  }
+
   const steps = [
     {
       number: 1,

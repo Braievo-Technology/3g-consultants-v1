@@ -14,7 +14,7 @@ import BrandText from "@/app/Components/ui/BrandText";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
-  const pathname = usePathname();
+  usePathname();
   const router = useRouter();
   useEffect(() => {
     const handleScroll = () => {
@@ -190,6 +190,7 @@ const Header = () => {
               className="relative flex items-center gap-3"
             >
               <div className="flex-shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://uploadthingy.s3.us-west-1.amazonaws.com/f1yqtq4t3Xjy4NfwYgbtYe/logo.jpg"
                   alt="3G Consultants Logo"

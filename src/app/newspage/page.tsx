@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import SectionTitle from "../Components/ui/SectionTitle";
-import { CalendarIcon, ClockIcon, MapPinIcon, TagIcon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { useNews } from "../hooks/useNews";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
@@ -72,6 +72,7 @@ const NewsPage = () => {
                   className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300"
                 >
                   <div className="relative h-48">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`http://localhost:3000${article.images}`}
                       alt={article.title}

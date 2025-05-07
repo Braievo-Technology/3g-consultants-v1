@@ -1,19 +1,11 @@
 "use client";
 import React from "react";
-import SectionTitle from "@/components/ui/SectionTitle";
-import WordCarousel from "@/components/animations/WordCarousel";
-import { motion } from "framer-motion";
-import {
-  LinkedinIcon,
-  TwitterIcon,
-  GlobeIcon,
-  FacebookIcon,
-  CheckCircleIcon,
-  UsersIcon,
-  EyeIcon,
-  TargetIcon,
-} from "lucide-react";
+import WordCarousel from "@/app/Components/animations/WorldCarousel";
 
+
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const teamMembers = [
   {
     name: "Saman Gamage",
@@ -55,6 +47,7 @@ const teamMembers = [
   },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const regularStaff = [
   {
     name: "Sarah Thompson",
@@ -74,80 +67,6 @@ const regularStaff = [
   },
   // Other staff...
 ];
-
-const TeamMemberCard = ({ member }: { member: (typeof teamMembers)[0] }) => (
-  <motion.div
-    className="relative group bg-white overflow-hidden rounded-lg shadow-lg"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    whileHover={{ scale: 1.02 }}
-  >
-    <div className="relative">
-      <div className="aspect-square w-full overflow-hidden">
-        <img
-          src={member.image}
-          alt={member.name}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-        />
-      </div>
-      <div className="p-6 text-center">
-        <h3 className="text-xl font-bold text-black">{member.name}</h3>
-        <p className="text-yellow-500 font-medium mt-1">{member.role}</p>
-        <p className="text-gray-600 text-sm mt-3">{member.shortBio}</p>
-      </div>
-      <motion.div
-        className="absolute inset-0 bg-white p-6 flex flex-col opacity-0 group-hover:opacity-100 transition-all duration-300"
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="text-black h-full flex flex-col justify-between">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
-            <p className="text-black font-medium">{member.role}</p>
-          </div>
-          <div className="flex-grow overflow-y-auto scrollbar-hide">
-            <div className="text-center">
-              <p className="text-black text-sm leading-relaxed">
-                {member.fullBio}
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  </motion.div>
-);
-
-const StaffCard = ({ member }: { member: (typeof regularStaff)[0] }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-  >
-    <div className="relative">
-      <div className="w-40 h-40 mx-auto mt-8 rounded-full overflow-hidden">
-        <img
-          src={member.image}
-          alt={member.name}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-        />
-      </div>
-      <div className="p-6">
-        <h3 className="text-lg font-bold text-blue-900 mb-1">{member.name}</h3>
-        <p className="text-yellow-500 text-sm font-medium mb-3">
-          {member.position}
-        </p>
-        <p className="text-gray-600 text-sm">{member.description}</p>
-      </div>
-    </div>
-  </motion.div>
-);
-
 const AboutPage = () => (
   <div className="w-full">
     <section className="relative bg-black text-white py-24">

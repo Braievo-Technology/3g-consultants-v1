@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcrypt';
+import argon2 from 'argon2';
 
 export async function POST(req: NextRequest) {
     try {
@@ -11,8 +11,14 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Missing username or password' }, { status: 400 });
         }
 
+        // Hash the password using argon2
+        const hashedPassword = await argon2.hash(password);
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // Optional: check if username already exists
+        const existingUser = await prisma.user.findUnique({ where: { userName } });
+        if (existingUser) {
+            return NextResponse.json({ error: 'Username already taken' }, { status: 409 });
+        }
 
         const newUser = await prisma.user.create({
             data: {

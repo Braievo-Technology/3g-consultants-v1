@@ -70,6 +70,7 @@ export async function POST(req: NextRequest) {
                     const imageDoc = Media.addImage(doc, imageBuffer);
                     children.push(new Paragraph(imageDoc));
                 } catch (err) {
+                    console.log(err)
                     children.push(new Paragraph({ text: `Image not found: ${image.image_name}` }));
                 }
             }

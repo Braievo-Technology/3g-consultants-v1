@@ -5,11 +5,11 @@ interface Column {
   key: string;
   header: string;
   width?: string;
-  render?: (value: any, row: any) => React.ReactNode;
+  render?: (value: never, row: never) => React.ReactNode;
 }
 interface DataTableProps {
   columns: Column[];
-  data: any[];
+  data: never[];
   searchPlaceholder?: string;
   filterOptions?: {
     label: string;
@@ -20,9 +20,9 @@ interface DataTableProps {
   };
   onSearch?: (value: string) => void;
   onFilter?: (value: string) => void;
-  onEdit?: (row: any) => void;
-  onDelete?: (row: any) => void;
-  onRowClick?: (row: any) => void;
+  onEdit?: (row: never) => void;
+  onDelete?: (row: never) => void;
+  onRowClick?: (row: never) => void;
 }
 export const DataTable: React.FC<DataTableProps> = ({
   columns,

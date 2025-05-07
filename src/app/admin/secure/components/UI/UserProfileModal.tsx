@@ -10,7 +10,18 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   onClose
 }) => {
   const [activeTab, setActiveTab] = useState('profile');
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    fullName: string;
+    email: string;
+    phone: string;
+    department: string;
+    position: string;
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+    avatar: string | File;
+    avatarPreview: string;
+  }>({
     fullName: 'John Doe',
     email: 'john.doe@example.com',
     phone: '+1 (555) 123-4567',
@@ -69,6 +80,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
             {/* Avatar Section */}
             <div className="mb-6 flex justify-center">
               <div className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={formData.avatarPreview} alt="Profile" className="h-24 w-24 rounded-full object-cover" />
                 <label className="absolute bottom-0 right-0 cursor-pointer rounded-full bg-white p-2 shadow-md hover:bg-gray-50">
                   <CameraIcon size={16} className="text-gray-600" />

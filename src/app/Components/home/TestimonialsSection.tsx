@@ -53,7 +53,7 @@ const TestimonialCard = ({
       <div className="flex flex-col h-full">
         <QuoteIcon size={40} className="text-yellow-500 opacity-50 mb-6" />
         <p className="text-gray-300 mb-8 flex-grow text-lg leading-relaxed">
-          "{testimonial.quote}"
+          &#34;{testimonial.quote}&#34;
         </p>
         <div className="flex items-center">
           <motion.img whileHover={{

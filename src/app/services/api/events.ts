@@ -39,14 +39,14 @@ export const eventService = {
     return response.data;
   },
   createEvent: async (event: {
-    date: any;
+    date: string;
     start_time: string;
-    images: any;
-    event_type: any;
+    images: string;
+    event_type: string;
     end_time: string;
-    description: any;
-    location: any;
-    title: any;
+    description: string;
+    location: string;
+    title: string;
     capacity: number;
     status: string;
   }) => {

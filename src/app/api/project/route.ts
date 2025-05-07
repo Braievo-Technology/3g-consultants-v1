@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
                 start_date: start_date ? new Date(start_date) : undefined,
                 end_date: end_date ? new Date(end_date) : undefined,
                 budget: budget ? parseFloat(budget) : undefined,
-                status: status as any, // or ProjectStatus if imported
+                status: status as never, // or ProjectStatus if imported
                 description,
                 category,
                 images: {

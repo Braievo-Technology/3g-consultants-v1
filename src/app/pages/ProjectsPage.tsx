@@ -20,6 +20,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       className="bg-white rounded-lg overflow-hidden border-2 border-gray-100 hover:border-gray-200 transition-all duration-300"
     >
       <div className="relative aspect-video">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`http://localhost:3000${project.images[0]?.image_name}`}
           alt={project.project_name}

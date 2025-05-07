@@ -1,30 +1,21 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
-import { Header } from "./Header";
-interface LayoutProps {
-  children: React.ReactNode;
+// Sidebar.tsx (or wherever Sidebar component is located)
+import React from "react";
+
+// Define the types for the Sidebar props
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setSidebarOpen(true);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   return (
-    <div className="flex h-screen bg-[#F9FAFB]">
-      <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 overflow-y-auto bg-[#F9FAFB]">
-          <div className="mx-auto w-full max-w-[2000px]">{children}</div>
-        </main>
+      <div>
+        {/* Sidebar implementation */}
+        <button onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? "Close Sidebar" : "Open Sidebar"}
+        </button>
       </div>
-    </div>
   );
 };
+
+export default Sidebar;

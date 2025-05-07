@@ -10,11 +10,11 @@ import TestimonialsSection from "@/app/Components/home/TestimonialsSection";
 import CtaSection from "@/app/Components/home/CtaSection";
 import NewsPreviewSection from "@/app/Components/home/NewsPreviewSection";
 import EventsPreviewSection from "@/app/Components/home/EventsPreviewSection";
-const metadata = {
+/*const metadata = {
   title: "3G Consultants | Engineering Excellence",
   description:
     "Engineering Excellence for Tomorrow's World. 3G Consultants delivers innovative engineering solutions with precision, expertise, and sustainable practices.",
-};
+};*/
 export default function HomePage() {
   return (
     <div className="w-full">

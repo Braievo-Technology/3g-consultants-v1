@@ -1,10 +1,11 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import SectionTitle from "../Components/ui/SectionTitle";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useProjects } from "../hooks/useProjects";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
+import {Project} from "@prisma/client";
 const projectCategories = ["All", "Planning", "Ongoing", "Completed"];
 const ProjectCard = ({ project }: { project: Project }) => {
   const normalizeStatus = (status: string) => {
@@ -30,6 +31,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       }}
     >
       <div className="relative aspect-[4/3]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`http://localhost:3000${project.images[0]?.image_name}`}
           alt={project.project_name}

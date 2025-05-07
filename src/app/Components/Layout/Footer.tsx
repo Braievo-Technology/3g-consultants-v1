@@ -7,8 +7,6 @@ import {
   MailIcon,
   MapPinIcon,
   FacebookIcon,
-  TwitterIcon,
-  InstagramIcon,
   LinkedinIcon,
   SendIcon,
   ChevronRightIcon,

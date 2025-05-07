@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import SectionTitle from '../components/ui/SectionTitle';
-import Button from '../components/ui/Button';
+
 import { MapPinIcon, PhoneIcon, MailIcon, ClockIcon, CheckCircleIcon } from 'lucide-react';
+import SectionTitle from "@/app/Components/ui/SectionTitle";
+import Button from "@/app/Components/ui/Button";
 const ContactPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h1 className="text-black font-bold text-4xl py-5">Get In Touch</h1>
-              <p className="text-lg text-white pb-5">We're here to answer your questions and discuss your project needs.</p>
+              <p className="text-lg text-white pb-5">We&#39;re here to answer your questions and discuss your project needs.</p>
               <div className="space-y-6 mt-8">
                 <div className="flex items-start">
                   <div className="bg-black p-3 rounded-full mr-4">
@@ -132,7 +133,7 @@ const ContactPage = () => {
                     Thank You!
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    Your message has been received. We'll get back to you
+                    Your message has been received. We&#39;ll get back to you
                     shortly.
                   </p>
                   <Button onClick={() => setFormSubmitted(false)} variant="secondary">

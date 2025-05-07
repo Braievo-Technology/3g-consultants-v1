@@ -1,14 +1,12 @@
 "use client";
 import React from "react";
-import { Link } from "react-router-dom";
+
 import SectionTitle from "../Components/ui/SectionTitle";
 import Button from "../Components/ui/Button";
 import {
   BuildingIcon,
   DropletIcon,
   LeafIcon,
-  HomeIcon,
-  BuildingIcon as UrbanIcon,
   BriefcaseIcon,
   MapIcon,
 } from "lucide-react";
@@ -142,6 +140,7 @@ const ServicesPage = () => {
                     <p className="text-gray-300">{service.description}</p>
                   </div>
                   <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={service.image}
                       alt={service.title}

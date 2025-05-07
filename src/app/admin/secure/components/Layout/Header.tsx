@@ -1,16 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { BellIcon, SearchIcon, MenuIcon } from "lucide-react";
-import { NotificationDropdown } from "../UI/NotificationDropdown";
-import { notificationsData } from "../../data/mockData";
+import { MenuIcon } from "lucide-react";
+/*import { NotificationDropdown } from "../UI/NotificationDropdown";
+import { notificationsData } from "../../data/mockData";*/
 import { UserProfileModal } from "../UI/UserProfileModal";
 interface HeaderProps {
   onMenuClick: () => void;
 }
 export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-  const location = useLocation();
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  /*const location = useLocation();*/
+/*  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState(notificationsData);
   const unreadCount = notifications.filter((n) => !n.read).length;
   const handleMarkAllRead = () => {
@@ -20,8 +19,8 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
         read: true,
       }))
     );
-  };
-  const getPageTitle = () => {
+  };*/
+/*  const getPageTitle = () => {
     const path = location.pathname;
     if (path.includes("dashboard")) return "Dashboard";
     if (path.includes("news-feed")) return "News Feed";
@@ -29,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     if (path.includes("job-opportunities")) return "Job Opportunities";
     if (path.includes("company-events")) return "Company Events";
     return "Dashboard";
-  };
+  };*/
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   return (
     <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-4 lg:px-6">

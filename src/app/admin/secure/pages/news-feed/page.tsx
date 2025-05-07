@@ -9,7 +9,7 @@ import { DataTable } from "@/app/admin/secure/components/UI/DataTable";
 import { Modal } from "@/app/admin/secure/components/UI/Modal";
 import { NewsForm } from "@/app/admin/secure/components/News/NewsForm";
 
-import {useRouter} from "next/navigation";
+
 
 const NewsFeedPage: React.FC = () => {
   const [news, setNews] = useState<NewsFeed[]>([]);
@@ -18,8 +18,8 @@ const NewsFeedPage: React.FC = () => {
   const [editingArticle, setEditingArticle] = useState<NewsFeed | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
+  const [, setIsLoading] = useState(true);
+  /*const router = useRouter();*/
 
 /*  useEffect(() => {
     const checkAuth = async () => {

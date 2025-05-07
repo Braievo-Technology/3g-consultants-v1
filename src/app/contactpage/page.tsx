@@ -74,7 +74,7 @@ const ContactPage = () => {
                   Get In Touch
                 </h1>
                 <p className="text-lg text-white pb-5">
-                  We're here to answer your questions and discuss your project
+                  We&#39;re here to answer your questions and discuss your project
                   needs.
                 </p>
                 <div className="space-y-6 mt-8">
@@ -153,7 +153,7 @@ const ContactPage = () => {
                       Thank You!
                     </h3>
                     <p className="text-gray-600 mb-6">
-                      Your message has been received. We'll get back to you
+                      Your message has been received. We&#39;ll get back to you
                       shortly.
                     </p>
                     <Button

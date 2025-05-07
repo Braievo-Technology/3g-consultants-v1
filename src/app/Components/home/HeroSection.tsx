@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import Link from 'next/link';
+
 import { motion } from 'framer-motion';
 import { ChevronDownIcon } from 'lucide-react';
 import Button from '../ui/Button';
@@ -45,7 +45,7 @@ const HeroSection = () => {
         <div className="max-w-3xl mt-20">
           <FadeIn delay={0.2}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-[#f1c235]">
-              Engineering Excellence for Tomorrow's World
+              Engineering Excellence for Tomorrow&#39;s World
             </h1>
           </FadeIn>
           <FadeIn delay={0.4}>

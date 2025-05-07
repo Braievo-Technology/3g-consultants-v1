@@ -1,15 +1,10 @@
 "use client";
 import React from "react";
 import SectionTitle from "../Components/ui/SectionTitle";
-import { CheckCircleIcon, UsersIcon, EyeIcon, TargetIcon } from "lucide-react";
+import {  EyeIcon, TargetIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import WordCarousel from "../Components/animations/WorldCarousel";
-import {
-  LinkedinIcon,
-  TwitterIcon,
-  GlobeIcon,
-  FacebookIcon,
-} from "lucide-react";
+
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
 const teamMembers = [
@@ -54,7 +49,7 @@ const teamMembers = [
     },
   },
 ];
-const regularStaff = [
+/*const regularStaff = [
   {
     name: "Sarah Thompson",
     position: "Senior Project Engineer",
@@ -135,7 +130,7 @@ const regularStaff = [
     image:
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
   },
-];
+];*/
 const TeamMemberCard = ({ member }: { member: (typeof teamMembers)[0] }) => {
   return (
     <motion.div
@@ -160,6 +155,7 @@ const TeamMemberCard = ({ member }: { member: (typeof teamMembers)[0] }) => {
     >
       <div className="relative">
         <div className="aspect-square w-full overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={member.image}
             alt={member.name}
@@ -201,7 +197,7 @@ const TeamMemberCard = ({ member }: { member: (typeof teamMembers)[0] }) => {
     </motion.div>
   );
 };
-const StaffCard = ({ member }: { member: (typeof regularStaff)[0] }) => {
+/*const StaffCard = ({ member }: { member: (typeof regularStaff)[0] }) => {
   return (
     <motion.div
       initial={{
@@ -222,6 +218,7 @@ const StaffCard = ({ member }: { member: (typeof regularStaff)[0] }) => {
     >
       <div className="relative">
         <div className="w-40 h-40 mx-auto mt-8 rounded-full overflow-hidden">
+          {/!* eslint-disable-next-line @next/next/no-img-element *!/}
           <img
             src={member.image}
             alt={member.name}
@@ -240,7 +237,7 @@ const StaffCard = ({ member }: { member: (typeof regularStaff)[0] }) => {
       </div>
     </motion.div>
   );
-};
+};*/
 const AboutPage = () => {
   return (
     <>
@@ -319,11 +316,13 @@ const AboutPage = () => {
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
                   alt="Construction team"
                   className="rounded-lg h-64 w-full object-cover"
                 />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                   alt="Historical project"
@@ -343,9 +342,9 @@ const AboutPage = () => {
                   <h2 className="text-3xl font-bold text-black">Our Vision</h2>
                 </div>
                 <p className="text-gray-700 mb-4 italic font-semibold">
-                  "To be a world-class engineering consultancy firm committed to
-                  total customer satisfaction and enriching shareholder's
-                  value..."
+                  &#34;To be a world-class engineering consultancy firm committed to
+                  total customer satisfaction and enriching shareholder&#39;s
+                  value...&#34;
                 </p>
               </div>
               <div className="bg-white p-8 rounded-lg shadow-md">
@@ -354,12 +353,12 @@ const AboutPage = () => {
                   <h2 className="text-3xl font-bold text-black">Our Mission</h2>
                 </div>
                 <p className="text-gray-700 mb-4 italic font-semibold">
-                  "Our Mission is to strengthen our position as a market leader
-                  and become the 'go-to' consultancy, for project and
+                  &#34;Our Mission is to strengthen our position as a market leader
+                  and become the &#39;go-to&#39; consultancy, for project and
                   construction management both locally and globally, by building
                   on our strengths - innovative thinking, excellent quality
                   assurance, timely completion, state of the art technology, and
-                  exhibiting the highest standards of expertise..."
+                  exhibiting the highest standards of expertise...&#34;
                 </p>
               </div>
             </div>

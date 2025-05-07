@@ -2,9 +2,36 @@ import React, { useState } from 'react'
 import {  XIcon, PlusIcon } from 'lucide-react'
 import {ProjectStatus} from "@prisma/client";
 
+
+interface ProjectFormData {
+    name: string
+    description: string
+    location: string
+    startDate: string
+    endDate: string
+    status: ProjectStatus
+    budget: number | string
+    category: string
+    images: File[]
+    imagesPreviews: string[]
+}
+
+interface InitialData {
+    project_name?: string
+    description?: string
+    location?: string
+    start_date?: string
+    end_date?: string
+    status?: ProjectStatus
+    budget?: number | string
+    category?: string
+    images?: { image_name: string }[]
+}
+
+
 interface ProjectFormProps {
-    onSubmit: (data: any) => void
-    initialData?: any
+    onSubmit: (data: ProjectFormData) => void
+    initialData?: InitialData
 }
 export const ProjectForm: React.FC<ProjectFormProps> = ({
                                                             onSubmit,
@@ -106,6 +133,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                     {formData.imagesPreviews.map((preview, index) => (
                         <div key={index} className="relative aspect-square">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={preview}
                                 alt={`Preview ${index + 1}`}
@@ -162,7 +190,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({
                         onChange={(e) =>
                             setFormData((prev) => ({
                                 ...prev,
-                                status: e.target.value,
+                                status: e.target.value as ProjectStatus,
                             }))
                         }
                         className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"

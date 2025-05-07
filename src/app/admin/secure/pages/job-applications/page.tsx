@@ -22,7 +22,7 @@ const JobApplications: React.FC = () => {
   const [selectedApplication, setSelectedApplication] =
     useState<JobApplication | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   const fetchApplications = async () => {
     try {
       setIsLoading(true);
@@ -63,24 +63,6 @@ const JobApplications: React.FC = () => {
       await fetchApplications();
     } catch (error) {
       console.error("Failed to update application:", error);
-    }
-  };
-  const getStatusColor = (
-    status: string
-  ): "green" | "yellow" | "blue" | "red" | "gray" => {
-    switch (status.toLowerCase()) {
-      case "shortlisted":
-        return "green";
-      case "under review":
-        return "yellow";
-      case "interviewed":
-        return "blue";
-      case "rejected":
-        return "red";
-      case "new":
-        return "blue";
-      default:
-        return "gray";
     }
   };
   const columns = [

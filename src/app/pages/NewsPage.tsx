@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SectionTitle from "../components/ui/SectionTitle";
-import { CalendarIcon, ClockIcon, ArrowRightIcon } from "lucide-react";
+
+import {  ArrowRightIcon } from "lucide-react";
 import { useNews } from "../hooks/useNews";
+import SectionTitle from "@/app/Components/ui/SectionTitle";
 const NewsPage = () => {
   const { news, loading, error } = useNews();
   if (loading) {
@@ -59,6 +60,7 @@ const NewsPage = () => {
                 className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="aspect-video relative overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`http://localhost:3000${article.images}`}
                     alt={article.title}

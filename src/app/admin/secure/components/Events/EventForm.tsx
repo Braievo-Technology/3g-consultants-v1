@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { XIcon, PlusIcon } from "lucide-react";
-import { Event as ApiEvent } from "@/app/admin/login/services/eventService";
+import { Event as ApiEvent } from "@/app/admin/secure/services/eventService";
 interface EventFormProps {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: never) => void;
   initialData?: ApiEvent;
 }
 export const EventForm: React.FC<EventFormProps> = ({
@@ -63,6 +63,7 @@ export const EventForm: React.FC<EventFormProps> = ({
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {formData.imagesPreviews.map((preview, index) => (
             <div key={index} className="relative aspect-square">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={preview}
                 alt={`Preview ${index + 1}`}

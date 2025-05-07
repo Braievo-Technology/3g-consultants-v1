@@ -6,18 +6,25 @@ import {
   FileTextIcon,
   CheckIcon,
 } from "lucide-react";
-import { JobApplication } from "@/app/admin/login/services/jobApplicationService";
+import { JobApplication } from "@/app/admin/secure/services/jobApplicationService";
 import { useState } from "react";
 
 interface ApplicationDetailsModalProps {
   application: JobApplication;
-  onUpdate: (id: number, data: Partial<JobApplication>) => void;
+  onUpdate: (id: number, data: {
+    cover_letter: string;
+    expected_salary: string;
+    contact: string;
+    name: string;
+    experience: string;
+    email: string
+  }) => void;
 }
 export const ApplicationDetailsModal: React.FC<
   ApplicationDetailsModalProps
 > = ({ application, onUpdate }) => {
   const [isUpdating, setIsUpdating] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData] = useState({
     name: application.name,
     email: application.email,
     contact: application.contact || "",
@@ -110,7 +117,7 @@ export const ApplicationDetailsModal: React.FC<
           <div className="space-y-2">
             <h4 className="text-sm font-medium text-gray-500">Skills</h4>
             <div className="flex flex-wrap gap-2">
-              {application.skills.map((skillObj, index) => (
+              {application.skills.map((skillObj) => (
                 <span
                   key={skillObj.id}
                   className="rounded-full bg-blue-50 px-2 py-1 text-xs text-blue-700"

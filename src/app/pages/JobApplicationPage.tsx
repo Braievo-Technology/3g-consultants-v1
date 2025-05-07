@@ -8,14 +8,11 @@ import {
   SendIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
-  MailIcon,
-  PhoneIcon,
-  BriefcaseIcon,
-  BuildingIcon,
-  DollarSignIcon,
+
 } from "lucide-react";
 import Button from "../Components/ui/Button";
 import { jobApplicationService } from "../services/api/jobApplicationService";
+import {CreateJobApplicationDTO} from "@/app/types/jobApplication";
 interface FormData {
   // Personal Details
   firstName: string;
@@ -57,22 +54,6 @@ const jobOpenings = [
 const JobApplicationPage = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
-  // Find the job from static data
-  const job = jobOpenings.find((job) => job.id === Number(jobId));
-  // If job not found, show error
-  if (!job) {
-    return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold text-blue-900 mb-4">Job Not Found</h1>
-        <p className="mb-8">
-          The job posting you're looking for doesn't exist or has been removed.
-        </p>
-        <Button href="/careers" variant="secondary">
-          View All Jobs
-        </Button>
-      </div>
-    );
-  }
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -94,6 +75,23 @@ const JobApplicationPage = () => {
     coverLetter: null,
   });
   const [newSkill, setNewSkill] = useState("");
+  // Find the job from static data
+  const job = jobOpenings.find((job) => job.id === Number(jobId));
+  // If job not found, show error
+  if (!job) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-3xl font-bold text-blue-900 mb-4">Job Not Found</h1>
+        <p className="mb-8">
+          The job posting you&#39;re looking for doesn&#39;t exist or has been removed.
+        </p>
+        <Button href="/careers" variant="secondary">
+          View All Jobs
+        </Button>
+      </div>
+    );
+  }
+
   const steps = [
     {
       number: 1,

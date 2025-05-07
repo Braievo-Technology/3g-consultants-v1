@@ -1,27 +1,43 @@
 import { PrismaClient, NewsFeedStatus } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-import {writeFile} from "fs/promises";
-import path from "node:path";
+import { writeFile } from 'fs/promises';
+import path from 'node:path';
 
 const prisma = new PrismaClient();
 
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
+// Utility to extract ID from URL
+function extractIdFromUrl(req: NextRequest): number | null {
+    const idStr = req.nextUrl.pathname.split('/').pop();
+    return idStr ? Number(idStr) : null;
+}
+
+// GET a news feed by ID
+export async function GET(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
     const feed = await prisma.newsFeed.findUnique({
-        where: { id: Number(params.id) },
+        where: { id },
         include: { images: true },
     });
+
+    if (!feed) {
+        return NextResponse.json({ message: 'News feed not found' }, { status: 404 });
+    }
+
     return NextResponse.json(feed);
 }
 
-export async function PUT(req: NextRequest, context: { params: { id: string } }) {
+// PUT update a news feed
+export async function PUT(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
     try {
-        const { id } = context.params;
-        const numericId = Number(id);
-
-        if (isNaN(numericId)) {
-            return NextResponse.json({ message: 'Invalid ID' }, { status: 400 });
-        }
-
         const formData = await req.formData();
 
         const title = formData.get('title') as string;
@@ -46,23 +62,37 @@ export async function PUT(req: NextRequest, context: { params: { id: string } })
         }
 
         const updated = await prisma.newsFeed.update({
-            where: { id: numericId },
+            where: { id },
             data: {
                 title,
                 summary,
                 status: status as NewsFeedStatus,
-                ...(imagePath && { images: imagePath }), // update image only if new image is uploaded
+                ...(imagePath && { images: imagePath }),
             },
         });
 
         return NextResponse.json(updated);
     } catch (error) {
-        console.error('FormData PUT error:', error);
+        console.error('PUT error:', error);
         return NextResponse.json({ message: 'Failed to update news feed' }, { status: 500 });
     }
 }
 
-export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
-    await prisma.newsFeed.delete({ where: { id: Number(params.id) } });
-    return NextResponse.json({ message: 'Deleted successfully' });
+// DELETE a news feed by ID
+export async function DELETE(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
+    try {
+        await prisma.newsFeed.delete({
+            where: { id },
+        });
+
+        return NextResponse.json({ message: 'Deleted successfully' });
+    } catch (error) {
+        console.error('DELETE error:', error);
+        return NextResponse.json({ message: 'Failed to delete news feed' }, { status: 500 });
+    }
 }

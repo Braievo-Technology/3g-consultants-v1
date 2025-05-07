@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import Link from 'next/link';
+
 import SectionTitle from '@/app/Components/ui/SectionTitle'
 import Button from '@/app/Components/ui/Button'
 import { CalendarIcon, MapPinIcon, ClockIcon } from 'lucide-react'
@@ -79,6 +79,7 @@ const EventsPage = () => {
                 <div className="flex flex-col md:flex-row h-full">
                   {event.images && event.images[0] && (
                     <div className="md:w-1/3 h-[200px] md:h-auto relative">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={event.images[0].image_name}
                         alt={event.title || ''}

@@ -6,7 +6,9 @@ export const useJobs = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   useEffect(() => {
-    fetchJobs();
+    fetchJobs().then(r => {
+      console.log(r)
+    });
   }, []);
   const fetchJobs = async () => {
     try {
@@ -32,7 +34,9 @@ export const useJob = (id: number) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   useEffect(() => {
-    fetchJob();
+    fetchJob().then(r => {
+      console.log(r)
+    });
   }, [id]);
   const fetchJob = async () => {
     try {

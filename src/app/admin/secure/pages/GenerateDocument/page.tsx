@@ -19,7 +19,7 @@ const GenerateDocument: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isGenerating, setIsGenerating] = useState(false)
     const [error, setError] = useState('')
-    const [isDownloading, setIsDownloading] = useState(false)
+
     const [generatedFilePath, setGeneratedFilePath] = useState<string | null>(
         null,
     )
@@ -185,6 +185,8 @@ const GenerateDocument: React.FC = () => {
                                     >
                                         <div className="flex items-start gap-6 p-6">
                                             <div className="aspect-video w-1/3">
+
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img
                                                     src={`http://localhost:3000${project.images[0]?.image_name}`}
                                                     alt={project.project_name}

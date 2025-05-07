@@ -4,7 +4,7 @@ interface WordRotatorProps {
   words: string[]
   variant?: 'fade'
 }
-const WordRotator = ({ words, variant = 'fade' }: WordRotatorProps) => {
+const WordRotator = ({ words}: WordRotatorProps) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {

@@ -1,12 +1,12 @@
 import React from "react";
-import Link from "next/link";
+
 import { motion } from "framer-motion";
 import Button from "@/app/Components/ui/Button";
 import {
   CheckCircleIcon,
   ScaleIcon,
   GlobeIcon,
-  AwardIcon,
+
   BuildingIcon,
   BriefcaseIcon,
 } from "lucide-react";

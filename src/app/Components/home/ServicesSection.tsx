@@ -6,9 +6,9 @@ import {
   BuildingIcon,
   DropletIcon,
   LeafIcon,
-  HomeIcon,
+
   BuildingIcon as UrbanIcon,
-  Briefcase as BriefcaseIcon,
+
   MapIcon,
   ChevronLeftIcon,
   ChevronRightIcon,

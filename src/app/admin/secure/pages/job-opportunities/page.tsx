@@ -8,13 +8,24 @@ import {AddButton} from "@/app/admin/secure/components/UI/AddButton";
 import {DataTable} from "@/app/admin/secure/components/UI/DataTable";
 import {Modal} from "@/app/admin/secure/components/UI/Modal";
 import {JobForm} from "@/app/admin/secure/components/Jobs/JobForm";
+interface JobFormData {
+    title: string;
+    type: 'FULLTIME' | 'PARTTIME' | 'CONTRACT' | 'INTERNSHIP';
+    department: string;
+    location: string;
+    deadline: string; // or Date if you're using `Date` objects
+    status: 'ACTIVE' | 'DRAFT' | 'CLOSED';
+    description: string;
+    requirements: string;
+}
+
 const JobOpportunities: React.FC = () => {
     const [jobs, setJobs] = useState<ApiJob[]>([])
     const [filteredJobs, setFilteredJobs] = useState<ApiJob[]>([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editingJob, setEditingJob] = useState<ApiJob | null>(null)
     const [searchTerm, setSearchTerm] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [, setIsLoading] = useState(true)
     const fetchJobs = async () => {
         try {
             const data = await jobService.getAllJobs()
@@ -42,7 +53,7 @@ const JobOpportunities: React.FC = () => {
         })
         setFilteredJobs(filtered)
     }, [searchTerm, jobs])
-    const handleAddJob = async (data: any) => {
+    const handleAddJob = async (data: JobFormData) => {
         try {
             const formattedData = {
                 job_title: data.title,
@@ -63,7 +74,7 @@ const JobOpportunities: React.FC = () => {
 
         }
     }
-    const handleUpdate = async (data: any) => {
+    const handleUpdate = async (data: JobFormData) => {
         if (!editingJob) return
         try {
             const formattedData = {

@@ -15,7 +15,7 @@ import {DataTable} from "@/app/admin/secure/components/UI/DataTable";
 import {Modal} from "@/app/admin/secure/components/UI/Modal";
 import {ProjectForm} from "@/app/admin/secure/components/Projects/ProjectForm";
 
-interface Project {
+/*interface Project {
     id: number
     name: string
     description: string
@@ -26,14 +26,26 @@ interface Project {
     budget?: string
     images?: string[]
     category?: string
+}*/
+interface ProjectFormData {
+    name: string
+    description: string
+    location: string
+    startDate: string
+    endDate: string
+    status: ProjectStatus
+    budget?: string
+    images?: { image_name: string }[]
+    category?: string
 }
+
 const Projects: React.FC = () => {
     const [projects, setProjects] = useState<ApiProject[]>([])
     const [filteredProjects, setFilteredProjects] = useState<ApiProject[]>([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editingProject, setEditingProject] = useState<ApiProject | null>(null)
     const [searchTerm, setSearchTerm] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [, setIsLoading] = useState(true)
     const fetchProjects = async () => {
         try {
             const data = await projectService.getAllProjects()
@@ -61,7 +73,7 @@ const Projects: React.FC = () => {
         })
         setFilteredProjects(filtered)
     }, [searchTerm, projects])
-    const handleAddProject = async (data: any) => {
+    const handleAddProject = async (data: ProjectFormData) => {
         try {
             const formattedData = {
                 project_name: data.name,
@@ -83,7 +95,7 @@ const Projects: React.FC = () => {
 
         }
     }
-    const handleUpdate = async (data: any) => {
+    const handleUpdate = async (data: ProjectFormData) => {
         if (!editingProject) return
         try {
             const formattedData = {
@@ -157,6 +169,7 @@ const Projects: React.FC = () => {
                     <div className="flex items-center space-x-3">
                         {row.images && row.images.length > 0 && (
                             <div className="relative h-10 w-10 flex-shrink-0">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={row.images[0].image_name}
                                     alt={value}
@@ -204,7 +217,7 @@ const Projects: React.FC = () => {
             key: 'timeline',
             header: 'Timeline',
             width: '20%',
-            render: (_: any, row: ApiProject) => (
+            render: (_: never, row: ApiProject) => (
                 <div className="space-y-1 text-sm">
                     <div className="flex items-center text-gray-600">
                         <CalendarIcon size={14} className="mr-1" />

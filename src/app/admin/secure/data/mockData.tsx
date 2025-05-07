@@ -1,4 +1,4 @@
-import React from 'react';
+
 // Dashboard data
 export const statsData = [{
   id: 1,

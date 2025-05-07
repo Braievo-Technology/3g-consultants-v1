@@ -1,8 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import SectionTitle from "../components/ui/SectionTitle";
-import Button from "../components/ui/Button";
+
 import { CheckCircleIcon } from "lucide-react";
+import Button from "../Components/ui/Button";
+import SectionTitle from "@/app/Components/ui/SectionTitle";
 const serviceData = {
   procurement: {
     title: "Procurement Contract",
@@ -145,7 +146,7 @@ const ServiceDetail = () => {
           Service Not Found
         </h1>
         <p className="mb-8">
-          The service you're looking for doesn't exist or has been moved.
+          The service you&#39;re looking for doesn&#39;t exist or has been moved.
         </p>
         <Button to="/services" variant="secondary">
           View All Services
