@@ -46,6 +46,9 @@ interface EventFormData {
     description?: string
     images?: string[]
 }*/
+
+
+
 const CompanyEvents: React.FC = () => {
     const [events, setEvents] = useState<ApiEvent[]>([])
     const [filteredEvents, setFilteredEvents] = useState<ApiEvent[]>([])
@@ -139,6 +142,7 @@ const CompanyEvents: React.FC = () => {
                 description: data.description,
                 images: data.images.map((img: File) => img.name),
             }
+
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             await eventService.updateEvent(editingEvent.id, formattedData)
@@ -166,6 +170,9 @@ const CompanyEvents: React.FC = () => {
             }
         }
     }
+
+
+
 
     return (
         <PageTransition>
@@ -283,14 +290,17 @@ const CompanyEvents: React.FC = () => {
                                 <div className="space-y-2 text-xs sm:text-sm text-gray-600">
                                     <div className="flex items-center">
                                         <CalendarIcon size={16} className="mr-2 text-gray-400"/>
-                                        <span>{event.date.slice(0, 10)}</span>
+                                        <span>{event.date.toISOString().slice(0, 10)}</span>
+
 
                                     </div>
                                     <div className="flex items-center">
                                         <ClockIcon size={16} className="mr-2 text-gray-400"/>
                                         <span>
                         <span>
-                          {event.start_time?.split('T')[1]?.slice(0, 5) || 'N/A'} - {event.end_time?.split('T')[1]?.slice(0, 5) || 'N/A'}
+                        {event.start_time?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || 'N/A'} -
+                            {event.end_time?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || 'N/A'}
+
                         </span>
 
                         </span>
@@ -341,7 +351,7 @@ const CompanyEvents: React.FC = () => {
                 >
                     <EventForm
                         onSubmit={editingEvent ? handleUpdate : handleAddEvent}
-                        initialData={editingEvent}
+                        initialData={editingEvent ?? undefined}
                     />
                 </Modal>
             </div>

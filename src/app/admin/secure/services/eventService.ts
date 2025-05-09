@@ -1,4 +1,5 @@
 import api from './api'
+import {ReactNode} from "react";
 
 export interface EventImage {
     id?: number
@@ -7,6 +8,7 @@ export interface EventImage {
 }
 
 export interface Event {
+    [x: string]: ReactNode
     id: number
     title: string
     event_type: string

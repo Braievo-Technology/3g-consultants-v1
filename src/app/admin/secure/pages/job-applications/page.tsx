@@ -116,6 +116,7 @@ const JobApplications: React.FC = () => {
       ),
     },
   ];
+
   return (
     <PageTransition>
       <div className="px-4 py-6 md:px-6 lg:px-8">
