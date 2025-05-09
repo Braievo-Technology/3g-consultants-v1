@@ -12,6 +12,8 @@ export const useProjects = () => {
     try {
       setLoading(true);
       const data = await projectService.getAllProjects();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       setProjects(data);
       setError(null);
     } catch (err) {

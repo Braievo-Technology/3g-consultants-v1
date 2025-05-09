@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SearchIcon, FilterIcon, Edit2Icon, Trash2Icon } from 'lucide-react';
-interface Column {
+interface Column<T> {
   key: string;
   header: string;
   width?: string;
-  render?: (value: never, row: never) => React.ReactNode;
+  render?: (value: any, row: T) => React.ReactNode;
 }
-interface DataTableProps {
-  columns: Column[];
-  data: never[];
+
+interface DataTableProps<T> {
+  columns: Column<T>[];
+  data: T[];
   searchPlaceholder?: string;
   filterOptions?: {
     label: string;
@@ -20,21 +21,22 @@ interface DataTableProps {
   };
   onSearch?: (value: string) => void;
   onFilter?: (value: string) => void;
-  onEdit?: (row: never) => void;
-  onDelete?: (row: never) => void;
-  onRowClick?: (row: never) => void;
+  onEdit?: (row: T) => void;
+  onDelete?: (row: T) => void;
+  onRowClick?: (row: T) => void;
 }
-export const DataTable: React.FC<DataTableProps> = ({
-  columns,
-  data,
-  searchPlaceholder = 'Search...',
-  filterOptions,
-  onSearch,
-  onFilter,
-  onEdit,
-  onDelete,
-  onRowClick
-}) => {
+
+export function DataTable<T>({
+                               columns,
+                               data,
+                               searchPlaceholder = 'Search...',
+                               filterOptions,
+                               onSearch,
+                               onFilter,
+                               onEdit,
+                               onDelete,
+                               onRowClick,
+                             }: DataTableProps<T>) {
   const [searchValue, setSearchValue] = useState('');
   const [filterValue, setFilterValue] = useState('All');
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +96,7 @@ export const DataTable: React.FC<DataTableProps> = ({
             delay: rowIndex * 0.05
           }} className={`hover:bg-gray-50 ${onRowClick ? 'cursor-pointer' : ''}`} onClick={() => onRowClick && onRowClick(row)}>
                   {columns.map(column => <td key={column.key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {column.render ? column.render(row[column.key], row) : row[column.key]}
+                      {column.render ? column.render(column.key, row) : column.key}
                     </td>)}
                   {(onEdit || onDelete) && <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       {onEdit && <button onClick={() => onEdit(row)} className="text-blue-600 hover:text-blue-900 mr-3">
@@ -127,7 +129,7 @@ export const DataTable: React.FC<DataTableProps> = ({
                       {column.header}
                     </div>
                     <div className="text-sm text-gray-900">
-                      {column.render ? column.render(row[column.key], row) : row[column.key]}
+                      {column.render ? column.render(column.key, row) : column.key}
                     </div>
                   </div>)}
                 {(onEdit || onDelete) && <div className="mt-4 flex justify-end space-x-3">

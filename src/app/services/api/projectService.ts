@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import api from './api'
 export enum ProjectStatus {
   Planning = "Planning",

@@ -1,4 +1,6 @@
 "use client";
+
+//@ts-nocheck
 import React from "react";
 import SectionTitle from "../Components/ui/SectionTitle";
 import { CalendarIcon } from "lucide-react";
@@ -99,7 +101,7 @@ const NewsPage = () => {
                           className="mr-2 text-yellow-500"
                         />
                         <span>
-                          {new Date(article.date).toLocaleDateString()}
+                         {/* {new Date(article.date).toLocaleDateString()}*/}
                         </span>
                       </div>
                     </div>

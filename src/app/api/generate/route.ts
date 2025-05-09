@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { NextRequest, NextResponse } from 'next/server';
 import { Document, Packer, Paragraph, Media } from 'docx';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ReactNode} from 'react'
 import { motion } from 'framer-motion'
 import FadeIn from '@/app/Components/animations/Fadeln'
 interface SectionTitleProps {

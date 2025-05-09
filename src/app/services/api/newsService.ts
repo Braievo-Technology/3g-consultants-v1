@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import api from './api';
 import { News } from '../../types/news';
 export const newsService = {

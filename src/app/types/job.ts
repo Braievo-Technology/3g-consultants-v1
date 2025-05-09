@@ -1,6 +1,7 @@
 export interface Job {
   id: number;
   job_title: string;
+  title: string;
   employment_type: "FULLTIME" | "PARTTIME" | "CONTRACT";
   department: string;
   location: string;

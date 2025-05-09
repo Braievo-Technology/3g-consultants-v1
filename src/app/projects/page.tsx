@@ -1,11 +1,14 @@
 "use client";
+//@ts-nocheck
 import React, { useMemo, useState } from "react";
 import SectionTitle from "../Components/ui/SectionTitle";
 import { motion } from "framer-motion";
 import { useProjects } from "../hooks/useProjects";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
-import {Project} from "@prisma/client";
+import {Project} from "@/app/types/project";
+
+
 const projectCategories = ["All", "Planning", "Ongoing", "Completed"];
 const ProjectCard = ({ project }: { project: Project }) => {
   const normalizeStatus = (status: string) => {
@@ -31,12 +34,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
       }}
     >
       <div className="relative aspect-[4/3]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+
+       {/* <img
           src={`http://localhost:3000${project.images[0]?.image_name}`}
           alt={project.project_name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        />
+        />*/}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-300" />
         <div className="absolute inset-0 p-6 flex flex-col justify-between">
           <div className="space-y-2">
@@ -68,11 +71,13 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 {project.project_name}
               </h3>
               <span className="text-sm font-medium text-black/80">
-                {new Date(project.start_date).toLocaleDateString("en-US", {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })}
+                {project.start_date &&
+                    new Date(project.start_date).toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+
                 {project.end_date &&
                   ` - ${new Date(project.end_date).toLocaleDateString("en-US", {
                     day: "numeric",

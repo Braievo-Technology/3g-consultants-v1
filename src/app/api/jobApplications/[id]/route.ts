@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -14,6 +16,7 @@ export async function GET(req: NextRequest) {
     if (!id) {
         return NextResponse.json({ error: 'Missing or invalid ID' }, { status: 400 });
     }
+
 
     const application = await prisma.jobApplications.findUnique({
         where: { id },

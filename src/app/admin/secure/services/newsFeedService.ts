@@ -1,12 +1,14 @@
 import api from './api'
 export interface NewsFeed {
+    createTime: null
     id: number
     title: string
     summary: string
-    status: string
+
     images: string
     createdAt?: Date
     updatedAt?: Date
+
 }
 export const newsFeedService = {
     getAllNews: async () => {

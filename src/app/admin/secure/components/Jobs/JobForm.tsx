@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
 interface JobData {
-    job_title: string;
+    title: string;
     employment_type: string;
     department: string;
     location: string;
     application_deadline: string;
     job_description: string;
     requirements: string;
-    status: 'DRAFT' | 'ACTIVE' | 'CLOSED';
+    status: 'DRAFT' | 'ACTIVE' | 'CLOSED',
+    type: string,
+    deadline: string,
+    description: string;
 }
 
 interface JobFormProps {
@@ -17,16 +20,18 @@ interface JobFormProps {
         description: string;
         location: string;
         title: string;
-        type: string;
+        type: 'FULLTIME' | 'PARTTIME' | 'CONTRACT' | 'INTERNSHIP';
         department: string;
-        deadline: never;
-        status: "DRAFT" | "ACTIVE" | "CLOSED"
-    }) => void;
+        deadline: string;
+        status: "DRAFT" | "ACTIVE" | "CLOSED";
+    }) => Promise<void>;
     initialData?: Partial<JobData>;
 }
+
+
 export const JobForm: React.FC<JobFormProps> = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState({
-    title: initialData?.job_title || "",
+    title: initialData?.title || "",
     type: initialData?.employment_type?.toLowerCase() || "fulltime",
     department: initialData?.department || "",
     location: initialData?.location || "",
@@ -37,8 +42,9 @@ export const JobForm: React.FC<JobFormProps> = ({ onSubmit, initialData }) => {
   });
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+      // @ts-expect-error
       onSubmit(formData);
   };
 

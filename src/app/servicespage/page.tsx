@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { CarIcon } from "lucide-react";
 
 import SectionTitle from "../Components/ui/SectionTitle";
 import Button from "../Components/ui/Button";
@@ -13,6 +14,7 @@ import {
 import { motion } from "framer-motion";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
+
 const services = [
   {
     id: "procurement",
@@ -29,7 +31,7 @@ const services = [
     title: "Highways and Transportation Engineering",
     description:
       "Sri Lanka, been a developing country that has initiated many infrastructure developments projects, mainly in urban and rural road development projects together with other supportive infrastructure development projects such as earthwork & paving, electrification, landscaping, widening, up-gradation and drainage and beyond. This has created many opportunities for our firm to demonstrate our talent in recent Highways and Transportation projects.",
-    icon: <div size={48} className="text-yellow-500" />,
+    icon: <CarIcon size={48} className="text-yellow-500" />,
     link: "/services/highways",
     image:
       "https://uploadthingy.s3.us-west-1.amazonaws.com/4uSRqgPmWzgHjbBK4u28DW/2.jpg",

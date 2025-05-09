@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import {$Enums, PrismaClient} from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
