@@ -5,9 +5,9 @@ import { MapPinIcon } from 'lucide-react'
 import { CalendarIcon } from 'lucide-react'
 import {
     projectService,
-    Project as ApiProject, ProjectStatus,
+    Project as ApiProject,
 } from '../../services/projectService'
-/*import {ProjectStatus} from "@prisma/client";*/
+import {ProjectStatus} from "@prisma/client";
 import {Badge} from "@/app/admin/secure/components/UI/Badge";
 import {PageTransition} from "@/app/admin/secure/components/UI/PageTransition";
 import {AddButton} from "@/app/admin/secure/components/UI/AddButton";
@@ -15,18 +15,6 @@ import {DataTable} from "@/app/admin/secure/components/UI/DataTable";
 import {Modal} from "@/app/admin/secure/components/UI/Modal";
 import {ProjectForm} from "@/app/admin/secure/components/Projects/ProjectForm";
 
-/*interface Project {
-    id: number
-    name: string
-    description: string
-    location: string
-    startDate: string
-    endDate: string
-    status: string
-    budget?: string
-    images?: string[]
-    category?: string
-}*/
 interface ProjectFormData {
     name: string
     description: string
@@ -34,8 +22,8 @@ interface ProjectFormData {
     startDate: string
     endDate: string
     status: ProjectStatus
-    budget?: number
-    images?: { image_name: string }[]
+    budget?: string | number
+    images?: File[] // Match the type used in ProjectForm.tsx
     category?: string
 }
 
@@ -82,7 +70,7 @@ const Projects: React.FC = () => {
                 start_date: data.startDate,
                 end_date: data.endDate,
                 status: data.status,
-                budget: data.budget ,
+                budget: data.budget ?? null, 
                 category: data.category,
                 images: data.images || [],
             }
@@ -107,7 +95,7 @@ const Projects: React.FC = () => {
                 start_date: new Date(data.startDate),
                 end_date: new Date(data.endDate),
                 status: data.status,
-                budget: data.budget,
+                budget: data.budget ?? null,
                 category: data.category,
                 images: data.images,
             }
@@ -222,7 +210,7 @@ const Projects: React.FC = () => {
             key: 'timeline',
             header: 'Timeline',
             width: '20%',
-            render: (_: never, row: ApiProject) => (
+            render: (value: string, row: ApiProject) => (
                 <div className="space-y-1 text-sm">
                     <div className="flex items-center text-gray-600">
                         <CalendarIcon size={14} className="mr-1" />
@@ -270,7 +258,7 @@ const Projects: React.FC = () => {
                     />
                 </div>
                 <div className="space-y-4">
-                    <DataTable
+                    <DataTable<ApiProject>
                         columns={columns}
                         data={filteredProjects}
                         searchPlaceholder="Search projects..."
@@ -313,7 +301,21 @@ const Projects: React.FC = () => {
                 >
                     <ProjectForm
                         onSubmit={editingProject ? handleUpdate : handleAddProject}
-                        initialData={editingProject}
+                        initialData={
+                            editingProject
+                              ? {
+                                project_name: editingProject.project_name,
+                                  description: editingProject.description,
+                                  location: editingProject.location,
+                                  start_date: new Date(editingProject.start_date).toISOString().split('T')[0],
+                                  end_date: new Date(editingProject.end_date).toISOString().split('T')[0],
+                                  status: editingProject.status,
+                                  budget: editingProject.budget ?? null,
+                                  images: editingProject.images ?? [],
+                                  category: editingProject.category ?? '',
+                                }
+                              : undefined
+                          }
                     />
                 </Modal>
             </div>

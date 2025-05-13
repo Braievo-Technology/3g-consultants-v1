@@ -30,7 +30,7 @@ interface InitialData {
 
 
 interface ProjectFormProps {
-    onSubmit: (data: ProjectFormData) => void
+    onSubmit: (data: ProjectFormData) => void | Promise<void>
     initialData?: InitialData
 }
 export const ProjectForm: React.FC<ProjectFormProps> = ({
