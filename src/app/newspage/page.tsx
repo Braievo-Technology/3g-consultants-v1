@@ -58,7 +58,7 @@ const NewsPage = () => {
             </p>
           </div>
         </section>
-        <section className="py-16 bg-black">
+        <section className="py-16 bg-[#f5f5f5]">
           <div className="container mx-auto px-4">
             <SectionTitle
               title="Latest News"

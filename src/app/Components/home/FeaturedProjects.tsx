@@ -168,7 +168,7 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
               duration: 0.5,
             }}
           >
-            <motion.span className="inline-block text-sm font-medium bg-[#f1c235] px-3 py-1 rounded-full text-black">
+            <motion.span className="inline-block text-sm font-medium bg-white px-3 py-1 rounded-full text-[#f1c235]">
               {content.category}
             </motion.span>
             <motion.h3 className="text-3xl md:text-4xl font-bold text-white">
@@ -220,7 +220,7 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
 };
 const FeaturedProjects = () => {
   return (
-    <section className="py-16 bg-black relative overflow-hidden">
+    <section className="py-16 bg-[#f5f5f5] relative overflow-hidden">
       <motion.div
         className="absolute inset-0"
         animate={{
@@ -250,7 +250,7 @@ const FeaturedProjects = () => {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Button href="/projects" variant="secondary">
+          <Button to="/projects" variant="primary">
             View All Projects
           </Button>
         </div>

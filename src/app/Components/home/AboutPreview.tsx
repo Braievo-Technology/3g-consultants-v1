@@ -6,7 +6,6 @@ import {
   CheckCircleIcon,
   ScaleIcon,
   GlobeIcon,
-
   BuildingIcon,
   BriefcaseIcon,
 } from "lucide-react";
@@ -54,7 +53,7 @@ const AboutPreview = () => {
     },
   ];
   return (
-    <section className="py-20 bg-black">
+    <section className="py-20 bg-[#f5f5f5]">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -95,7 +94,7 @@ const AboutPreview = () => {
                 Engineering Solutions for a Sustainable Future
               </motion.h2>
               <motion.p
-                className="text-lg text-white mb-6"
+                className="text-lg text-black mb-6"
                 initial={{
                   opacity: 0,
                   y: 20,
@@ -213,7 +212,7 @@ const AboutPreview = () => {
                     className="text-[#f1c235] mr-3 flex-shrink-0"
                     size={20}
                   />
-                  <span className="text-white">{item}</span>
+                  <span className="text-black">{item}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -234,7 +233,7 @@ const AboutPreview = () => {
                 delay: 0.6,
               }}
             >
-              <Button href="/about" variant="secondary">
+              <Button to="/about" variant="primary">
                 Discover Our Story
               </Button>
             </motion.div>

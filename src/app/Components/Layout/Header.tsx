@@ -148,7 +148,7 @@ const Header = () => {
   };
   return (
     <header className="sticky top-0 w-full z-50">
-      <div
+      <motion.div
         initial="initial"
         animate="animate"
         variants={headerVariants}
@@ -170,11 +170,11 @@ const Header = () => {
             <span className="text-sm">Mon - Fri: 8:00AM - 5:00PM</span>
           </div>
         </div>
-      </div>
+      </motion.div>
       <div
-        className={`bg-black shadow-md transition-all duration-300 ${
-          hasScrolled ? "rounded-b-2xl" : ""
-        }`}
+        className={`${
+          hasScrolled ? "backdrop-blur-lg" : "bg-[#f5f5f5]"
+        } shadow-md transition-all duration-300`}
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
@@ -190,7 +190,6 @@ const Header = () => {
               className="relative flex items-center gap-3"
             >
               <div className="flex-shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://uploadthingy.s3.us-west-1.amazonaws.com/f1yqtq4t3Xjy4NfwYgbtYe/logo.jpg"
                   alt="3G Consultants Logo"
@@ -208,8 +207,10 @@ const Header = () => {
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.path}
-                  onClick={() => handleNavClick(item.sectionId, item.path)}
-                  className="text-[#f1c235] hover:text-white font-medium cursor-pointer"
+                  onClick={() =>
+                    handleNavClick(item.sectionId || "", item.path || "")
+                  }
+                  className="text-[#f1c235] hover:text-black font-medium cursor-pointer"
                   whileHover={{
                     scale: 1.1,
                     transition: {
@@ -236,7 +237,7 @@ const Header = () => {
             </nav>
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden text-white focus:outline-none"
+              className="md:hidden text-black focus:outline-none"
               whileHover={{
                 scale: 1.1,
               }}
@@ -278,7 +279,9 @@ const Header = () => {
                   key={item.path}
                   custom={index}
                   variants={navItemVariants}
-                  onClick={() => handleNavClick(item.sectionId, item.path)}
+                  onClick={() =>
+                    handleNavClick(item.sectionId || "", item.path || "")
+                  }
                   className="text-xl text-gray-800 hover:text-blue-700 font-medium"
                   whileHover={{
                     scale: 1.1,

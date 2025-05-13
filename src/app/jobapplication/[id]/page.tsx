@@ -1,6 +1,6 @@
 "use client";
-import React, {useState, Fragment, useEffect} from "react";
-import {useParams, useRouter} from "next/navigation";
+import React, { useState, Fragment, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   CheckCircleIcon,
@@ -14,10 +14,11 @@ import Button from "@/app/Components/ui/Button";
 import { jobService } from "../../services/api/jobService";
 import { CreateJobApplicationDTO } from "../../types/jobApplication";
 import { jobApplicationService } from "../../services/api/jobApplicationService";
-import {Job} from "@/app/types/job";
+import { Job } from "@/app/types/job";
+import Footer from "@/app/Components/Layout/Footer";
+import Header from "@/app/Components/Layout/Header";
 
 interface FormData {
-
   firstName: string;
   lastName: string;
   email: string;
@@ -60,7 +61,9 @@ const JobApplicationPage = () => {
   useEffect(() => {
     const fetchJob = async () => {
       const jobOpenings = await jobService.getAllJobs();
-      const foundJob = jobOpenings.find((job: Job) => job.id === Number(params.id));
+      const foundJob = jobOpenings.find(
+        (job: Job) => job.id === Number(params.id)
+      );
       setJob(foundJob);
     };
 
@@ -72,9 +75,10 @@ const JobApplicationPage = () => {
       <div className="container mx-auto px-4 py-16 text-center">
         <h1 className="text-3xl font-bold text-blue-900 mb-4">Job Not Found</h1>
         <p className="mb-8">
-          The job posting you&#39;re looking for doesn&#39;t exist or has been removed.
+          The job posting you&#39;re looking for doesn&#39;t exist or has been
+          removed.
         </p>
-        <Button href="/careerspage" variant="secondary">
+        <Button to="/careerspage" variant="secondary">
           View All Jobs
         </Button>
       </div>
@@ -138,7 +142,7 @@ const JobApplicationPage = () => {
       };
       await jobApplicationService.createJobApplication(applicationData);
       // Show success message and redirect
-      router.push('/careerspage');
+      router.push("/careerspage");
     } catch (error) {
       console.error("Error submitting application:", error);
       // Handle error - show error message to user
@@ -420,128 +424,132 @@ const JobApplicationPage = () => {
     }
   };
   return (
-    <div className="w-full">
-      <div className="bg-blue-900 py-12">
-        <div className="container mx-auto px-4">
-          <button
-            onClick={() => router.push("/careerspage")}
-            className="text-white flex items-center hover:underline"
-          >
-            <ArrowLeftIcon className="w-4 h-4 mr-2" />
-            Back to Job Listing
-          </button>
-          <h1 className="text-3xl font-bold text-white mt-4">
-            Job Application
-          </h1>
+    <>
+      <Header />
+      <div className="w-full">
+        <div className="bg-[#f1c235] py-12">
+          <div className="container mx-auto px-4">
+            <button
+              onClick={() => router.push("/careerspage")}
+              className="text-white flex items-center hover:underline"
+            >
+              <ArrowLeftIcon className="w-4 h-4 mr-2" />
+              Back to Job Listing
+            </button>
+            <h1 className="text-3xl font-bold text-white mt-4">
+              Job Application
+            </h1>
+          </div>
         </div>
-      </div>
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto">
-          {/* Stepper */}
-          <div className="mb-12">
-            <div className="flex items-center justify-center">
-              {steps.map((step, index) => (
-                <Fragment key={step.number}>
-                  <div className="flex flex-col items-center relative">
-                    <motion.div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center relative z-10 transition-colors duration-300 ${
-                        currentStep > step.number
-                          ? "bg-green-500 text-white"
-                          : currentStep === step.number
-                          ? "bg-blue-900 text-white"
-                          : "bg-gray-200 text-gray-500"
-                      }`}
-                      initial={{
-                        scale: 0.8,
-                      }}
-                      animate={{
-                        scale: currentStep === step.number ? 1 : 0.8,
-                      }}
-                    >
-                      {currentStep > step.number ? (
-                        <CheckCircleIcon className="w-6 h-6" />
-                      ) : (
-                        step.icon
-                      )}
-                    </motion.div>
-                    <div
-                      className={`text-sm font-medium mt-2 absolute -bottom-6 w-max ${
-                        currentStep >= step.number
-                          ? "text-blue-900"
-                          : "text-gray-500"
-                      }`}
-                      style={{
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                      }}
-                    >
-                      {step.title}
-                    </div>
-                  </div>
-                  {index < steps.length - 1 && (
-                    <div className="flex-1 h-[2px] mx-4 relative">
-                      <div className="absolute inset-0 bg-gray-200" />
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-3xl mx-auto">
+            {/* Stepper */}
+            <div className="mb-12">
+              <div className="flex items-center justify-center">
+                {steps.map((step, index) => (
+                  <Fragment key={step.number}>
+                    <div className="flex flex-col items-center relative">
                       <motion.div
-                        className="absolute inset-0 bg-blue-900"
+                        className={`w-10 h-10 rounded-full flex items-center justify-center relative z-10 transition-colors duration-300 ${
+                          currentStep > step.number
+                            ? "bg-green-500 text-white"
+                            : currentStep === step.number
+                            ? "bg-black text-[#f1c235]"
+                            : "bg-gray-200 text-gray-500"
+                        }`}
                         initial={{
-                          scaleX: 0,
+                          scale: 0.8,
                         }}
                         animate={{
-                          scaleX: currentStep > step.number ? 1 : 0,
+                          scale: currentStep === step.number ? 1 : 0.8,
                         }}
+                      >
+                        {currentStep > step.number ? (
+                          <CheckCircleIcon className="w-6 h-6" />
+                        ) : (
+                          step.icon
+                        )}
+                      </motion.div>
+                      <div
+                        className={`text-sm font-medium mt-2 absolute -bottom-6 w-max ${
+                          currentStep >= step.number
+                            ? "text-blue-900"
+                            : "text-gray-500"
+                        }`}
                         style={{
-                          originX: 0,
+                          left: "50%",
+                          transform: "translateX(-50%)",
                         }}
-                        transition={{
-                          duration: 0.5,
-                        }}
-                      />
+                      >
+                        {step.title}
+                      </div>
                     </div>
-                  )}
-                </Fragment>
-              ))}
-            </div>
-          </div>
-          {/* Form */}
-          <form onSubmit={handleSubmit}>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              {renderStepContent()}
-            </div>
-            {/* Navigation Buttons */}
-            <div className="mt-8 flex justify-between">
-              {currentStep > 1 && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handlePrevious}
-                  className="flex items-center"
-                >
-                  <ArrowLeftIcon className="w-4 h-4 mr-2" />
-                  Previous
-                </Button>
-              )}
-              <div className="ml-auto">
-                {currentStep < 3 ? (
-                  <Button
-                    type="button"
-                    variant="primary"
-                    onClick={handleNext}
-                    className="flex items-center"
-                  >
-                    Next
-                    <ArrowRightIcon className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <Button type="submit" variant="primary">
-                    Submit Application
-                  </Button>
-                )}
+                    {index < steps.length - 1 && (
+                      <div className="flex-1 h-[2px] mx-4 relative">
+                        <div className="absolute inset-0 bg-gray-200" />
+                        <motion.div
+                          className="absolute inset-0 bg-blue-900"
+                          initial={{
+                            scaleX: 0,
+                          }}
+                          animate={{
+                            scaleX: currentStep > step.number ? 1 : 0,
+                          }}
+                          style={{
+                            originX: 0,
+                          }}
+                          transition={{
+                            duration: 0.5,
+                          }}
+                        />
+                      </div>
+                    )}
+                  </Fragment>
+                ))}
               </div>
             </div>
-          </form>
+            {/* Form */}
+            <form onSubmit={handleSubmit}>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                {renderStepContent()}
+              </div>
+              {/* Navigation Buttons */}
+              <div className="mt-8 flex justify-between">
+                {currentStep > 1 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handlePrevious}
+                    className="flex items-center"
+                  >
+                    <ArrowLeftIcon className="w-4 h-4 mr-2" />
+                    Previous
+                  </Button>
+                )}
+                <div className="ml-auto">
+                  {currentStep < 3 ? (
+                    <Button
+                      type="button"
+                      variant="primary"
+                      onClick={handleNext}
+                      className="flex items-center"
+                    >
+                      Next
+                      <ArrowRightIcon className="w-4 h-4 ml-2" />
+                    </Button>
+                  ) : (
+                    <Button type="submit" variant="primary">
+                      Submit Application
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 export default JobApplicationPage;

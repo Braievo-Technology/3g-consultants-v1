@@ -100,7 +100,7 @@ const ServicesPage = () => {
           </div>
         </section>
         {/* Services Overview */}
-        <section className="py-16 bg-black relative overflow-hidden">
+        <section className="py-16 bg-[#f5f5f5] relative overflow-hidden">
           <motion.div
             className="absolute inset-0"
             animate={{
@@ -120,7 +120,7 @@ const ServicesPage = () => {
             <SectionTitle
               title="What We Offer"
               subtitle="BuildConstruct provides a wide range of services across the construction and engineering spectrum."
-              className="text-white [&>div>p]:text-gray-300"
+              className="text-white [&>div>p]:text-black"
             />
             <div className="space-y-16">
               {services.map((service, index) => (
@@ -133,14 +133,13 @@ const ServicesPage = () => {
                   <div className={`${index % 2 === 1 ? "lg:order-2" : ""}`}>
                     <div className="flex items-center mb-6">
                       {service.icon}
-                      <h2 className="text-3xl font-bold text-white ml-4">
+                      <h2 className="text-3xl font-bold text-[#f1c235] ml-4">
                         {service.title}
                       </h2>
                     </div>
-                    <p className="text-gray-300">{service.description}</p>
+                    <p className="text-black">{service.description}</p>
                   </div>
                   <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={service.image}
                       alt={service.title}
@@ -153,16 +152,16 @@ const ServicesPage = () => {
           </div>
         </section>
         {/* CTA Section */}
-        <section className="py-16 bg-yellow-500">
+        <section className="py-16 bg-[#f1c235]">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-white mb-6">
+            <h2 className="text-3xl font-bold text-black mb-6">
               Need a Custom Solution?
             </h2>
-            <p className="text-lg text-white mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-black mb-8 max-w-2xl mx-auto">
               Our team of experts can develop a tailored approach to meet your
               specific project requirements.
             </p>
-            <Button href="/contact" variant="primary">
+            <Button to="/contact" variant="secondary">
               Contact Us for a Consultation
             </Button>
           </div>

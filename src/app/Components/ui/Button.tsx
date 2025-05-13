@@ -1,73 +1,72 @@
-import React from 'react'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
+"use client"; // required for client-side hooks like usePathname
+import React from "react";
+import { usePathname } from "next/navigation";
+import ButtonV2 from "./ButtonV2";
+
 interface ButtonProps {
-  children: React.ReactNode
-  href?: string
-  variant?: 'primary' | 'secondary' | 'outline'
-  className?: string
-  onClick?: () => void
-  type?: 'button' | 'submit' | 'reset'
-  disabled?: boolean
+  children: React.ReactNode;
+  to?: string;
+  variant?: "primary" | "secondary" | "outline";
+  className?: string;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
+
 const Button = ({
   children,
-  href,
-  variant = 'primary',
-  className = '',
+  to,
+  variant = "primary",
+  className = "",
   onClick,
-  type = 'button',
+  type = "button",
   disabled = false,
 }: ButtonProps) => {
-  const baseClasses =
-    'relative inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden'
-  const variantClasses = {
-    primary:
-      'bg-gradient-to-r from-[#f1c235] to-[#f1c235] text-black shadow-lg hover:shadow-[#f1c235]/25',
-    secondary:
-      'bg-gradient-to-r from-[#f1c235] to-[#f1c235] text-black shadow-lg hover:shadow-[#f1c235]/25',
-    outline:
-      'border-2 border-black text-black hover:text-white hover:bg-black shadow-lg hover:shadow-black/25',
-  }
-  const allClasses = `${baseClasses} ${variantClasses[variant]} ${className}`
-  const buttonContent = (
-    <>
-      <span className="relative z-10 flex items-center gap-2">{children}</span>
-      <motion.div
-        className="absolute inset-0 bg-white"
-        initial={{
-          scale: 0,
-          opacity: 0,
-        }}
-        whileHover={{
-          scale: 1,
-          opacity: 0.15,
-        }}
-        transition={{
-          duration: 0.3,
-        }}
-      />
-    </>
-  )
-  if (href) {
-    return (
-      <Link href={href} className={allClasses} aria-disabled={disabled}>
-        {buttonContent}
-      </Link>
-    )
-  }
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      onClick();
+      return;
+    }
+
+    if (isHome && to?.startsWith("#")) {
+      e.preventDefault();
+      const element = document.querySelector(to);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      return;
+    }
+
+    if (isHome && to && !to.startsWith("#")) {
+      e.preventDefault();
+      const sectionId = to.replace("/", "#");
+      const element = document.querySelector(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      return;
+    }
+
+    if (to && !isHome) {
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
-    <motion.button
+    <ButtonV2
+      to={to}
+      variant={variant}
+      className={className}
+      onClick={handleClick}
       type={type}
-      onClick={onClick}
-      className={allClasses}
       disabled={disabled}
-      whileTap={{
-        scale: 0.98,
-      }}
     >
-      {buttonContent}
-    </motion.button>
-  )
-}
-export default Button
+      {children}
+    </ButtonV2>
+  );
+};
+
+export default Button;

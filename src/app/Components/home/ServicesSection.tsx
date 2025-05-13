@@ -6,9 +6,7 @@ import {
   BuildingIcon,
   DropletIcon,
   LeafIcon,
-
   BuildingIcon as UrbanIcon,
-
   MapIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -20,7 +18,7 @@ const services = [
     title: "Procurement and Contracts",
     subtitle:
       "Procurement involves making purchasing decisions under conditions of scarcity. To ensure project success, a legally binding contract is essential, as it defines the rights and obligations of all parties involved. Effective Contract Administration is key to successfully delivering the project.",
-    icon: <BuildingIcon className="w-8 h-8 text-yellow-500" />,
+    icon: <BuildingIcon className="w-8 h-8 text-black" />,
     link: "/services/construction",
     image: "/assets/staticimages/1.jpg",
   },
@@ -29,7 +27,7 @@ const services = [
     title: "Highways and Transportation Engineering",
     subtitle:
       "Sri Lanka's ongoing infrastructure developments, particularly in roads and related works, have opened up valuable opportunities for the firm to demonstrate its expertise in recent Highways and Transportation projects.",
-    icon: <MapIcon className="w-8 h-8 text-yellow-500" />,
+    icon: <MapIcon className="w-8 h-8 text-black" />,
     link: "/services/highways",
     image: "/assets/staticimages/2.jpg",
   },
@@ -38,7 +36,7 @@ const services = [
     title: "Water Resources Engineering",
     subtitle:
       "3G Consultants (Pvt) Ltd. places high importance on water conservation and has consistently focused on sustainable water resource management, strictly following international standards in Water Resource Engineering.",
-    icon: <DropletIcon className="w-8 h-8 text-yellow-500" />,
+    icon: <DropletIcon className="w-8 h-8 text-black" />,
     link: "/services/water",
     image: "/assets/staticimages/3.jpg",
   },
@@ -47,7 +45,7 @@ const services = [
     title: "Environmental and Climate Resilience Engineering",
     subtitle:
       "Sri Lanka, known for its rich biodiversity, offers ideal conditions for diverse flora and fauna. 3G Consultants (Pvt) Ltd. is committed to environmental protection and strongly values sustainable development and conservation.",
-    icon: <LeafIcon className="w-8 h-8 text-yellow-500" />,
+    icon: <LeafIcon className="w-8 h-8 text-black" />,
     link: "/services/environmental",
     image: "/assets/staticimages/4.jpg",
   },
@@ -56,7 +54,7 @@ const services = [
     title: "Urban, Rural and Regional Development",
     subtitle:
       "To meet the growing population and rising living standards, numerous Urban, Rural, and Regional development projects are being initiated. 3G Consultants (Pvt) Ltd. believes that well-planned, innovative design is essential for these projects, especially when considering future expansion needs.",
-    icon: <MapIcon className="w-8 h-8 text-yellow-500" />,
+    icon: <MapIcon className="w-8 h-8 text-black" />,
     link: "/services/urban",
     image: "/assets/staticimages/5.jpg",
   },
@@ -65,7 +63,7 @@ const services = [
     title: "Commercial and Housing Development",
     subtitle:
       "In many developing countries, there is a growing trend to adopt modern living standards by embracing Western-inspired architectural styles and advanced technologies, seen in developments like luxury housing, IT parks, educational cities, waterfronts, high-rise buildings, and iconic structures.",
-    icon: <UrbanIcon className="w-8 h-8 text-yellow-500" />,
+    icon: <UrbanIcon className="w-8 h-8 text-black" />,
     link: "/services/investment",
     image: "/assets/staticimages/6.jpg",
   },
@@ -287,7 +285,7 @@ const ServicesSection = () => {
     <section
       className="relative h-screen w-full overflow-hidden flex flex-col items-center"
       style={{
-        backgroundColor: "black",
+        backgroundColor: "#f5f5f5",
       }}
     >
       <SectionTitle

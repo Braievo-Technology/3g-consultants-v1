@@ -1,12 +1,29 @@
 /** @type {import('next').NextConfig} */
-const nextConfig: import('next').NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true, // ⛔ Skip ESLint during ⁠ next build ⁠
+const nextConfig = {
+  images: {
+    domains: ["images.unsplash.com"],
   },
-
-
-
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, PUT, DELETE",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "X-Custom-Header, Content-Type",
+          },
+        ],
+      },
+    ];
+  },
 };
-  
-  module.exports = nextConfig;
-  
+
+module.exports = nextConfig;

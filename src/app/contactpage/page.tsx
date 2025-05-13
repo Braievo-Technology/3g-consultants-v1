@@ -66,16 +66,16 @@ const ContactPage = () => {
           </div>
         </section>
         {/* Contact Information */}
-        <section className="py-16 bg-[#f1c235]">
+        <section className="py-16 bg-[#f5f5f5]">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
-                <h1 className="text-black font-bold text-4xl py-5">
+                <h1 className="text-[#f1c235] font-bold text-4xl py-5">
                   Get In Touch
                 </h1>
-                <p className="text-lg text-white pb-5">
-                  We&#39;re here to answer your questions and discuss your project
-                  needs.
+                <p className="text-lg text-black pb-5">
+                  We&#39;re here to answer your questions and discuss your
+                  project needs.
                 </p>
                 <div className="space-y-6 mt-8">
                   <div className="flex items-start">
@@ -283,7 +283,7 @@ const ContactPage = () => {
           </div>
         </section>
         {/* Map Section */}
-        <section className="py-16 bg-black">
+        <section className="py-16 bg-[#f5f5f5]">
           <div className="container mx-auto px-4">
             <SectionTitle
               title="Our Location"

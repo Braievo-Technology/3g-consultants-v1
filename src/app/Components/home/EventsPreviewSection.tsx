@@ -2,12 +2,7 @@
 import React from "react";
 
 import { motion } from "framer-motion";
-import {
-  CalendarIcon,
-  MapPinIcon,
-  ClockIcon,
-
-} from "lucide-react";
+import { CalendarIcon, MapPinIcon, ClockIcon } from "lucide-react";
 import SectionTitle from "@/app/Components/ui/SectionTitle";
 import Button from "@/app/Components/ui/Button";
 import { useEvents } from "@/app/hooks/useEvents";
@@ -15,7 +10,10 @@ const EventsPreviewSection = () => {
   const { events, loading, error } = useEvents();
   if (loading) {
     return (
-      <section id="events" className="py-20 bg-black relative overflow-hidden">
+      <section
+        id="events"
+        className="py-20 bg-[#f5f5f5] relative overflow-hidden"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center text-white">Loading events...</div>
         </div>
@@ -24,7 +22,10 @@ const EventsPreviewSection = () => {
   }
   if (error) {
     return (
-      <section id="events" className="py-20 bg-black relative overflow-hidden">
+      <section
+        id="events"
+        className="py-20 bg-[#f5f5f5] relative overflow-hidden"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center text-red-500">
             Error loading events: {error.message}
@@ -35,7 +36,10 @@ const EventsPreviewSection = () => {
   }
   const previewEvents = events.slice(0, 2);
   return (
-    <section id="events" className="py-20 bg-black relative overflow-hidden">
+    <section
+      id="events"
+      className="py-20 bg-[#f5f5f5] relative overflow-hidden"
+    >
       <motion.div
         className="absolute inset-0"
         animate={{
@@ -56,7 +60,6 @@ const EventsPreviewSection = () => {
           title="Upcoming Events"
           subtitle="Join us at our upcoming events and stay connected"
           centered={true}
-          className="text-white [&>div>p]:text-white"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {previewEvents.map((event, index) => (
@@ -79,7 +82,7 @@ const EventsPreviewSection = () => {
               }}
               className="group relative bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden h-full"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/70 opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/70 opacity-90" />
               <div className="relative flex flex-col md:flex-row h-full">
                 {event.images && event.images[0] && (
                   <div className="md:w-2/5 h-full">
@@ -97,10 +100,10 @@ const EventsPreviewSection = () => {
                   </div>
                 )}
                 <div className="p-6 md:w-3/5">
-                  <h3 className="text-xl font-bold text-white mb-4">
+                  <h3 className="text-xl font-bold text-[#f1c235] mb-4">
                     {event.title}
                   </h3>
-                  <div className="space-y-2 text-blue-100">
+                  <div className="space-y-2 text-gray-400 mt-[50px]">
                     <div className="flex items-center">
                       <CalendarIcon size={16} className="mr-2" />
                       <span>{new Date(event.date).toLocaleDateString()}</span>
@@ -117,32 +120,13 @@ const EventsPreviewSection = () => {
                       <span>{event.location}</span>
                     </div>
                   </div>
-                  <motion.div
-                    initial={{
-                      opacity: 0,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                    }}
-                    transition={{
-                      delay: 0.3,
-                    }}
-                    className="mt-6"
-                  >
-                    {/* <Link
-                      href={`/events/${event.id}`}
-                      className="inline-block px-6 py-2 bg-yellow-500 text-blue-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors"
-                    >
-                      Learn More
-                    </Link> */}
-                  </motion.div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
         <div className="text-center">
-          <Button href="/events" variant="primary">
+          <Button to="/events" variant="primary">
             View All Events
           </Button>
         </div>

@@ -10,7 +10,7 @@ const NewsPreviewSection = () => {
   const { news, loading, error } = useNews();
   if (loading) {
     return (
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="py-20 bg-[#f5f5f5] relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center text-white">Loading news...</div>
         </div>
@@ -19,7 +19,7 @@ const NewsPreviewSection = () => {
   }
   if (error) {
     return (
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="py-20 bg-[#f5f5f5] relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center text-red-500">
             Error loading news: {error.message}
@@ -32,7 +32,7 @@ const NewsPreviewSection = () => {
     .filter((item) => item.status === "published")
     .slice(0, 3);
   return (
-    <section id="news" className="py-20 bg-black relative overflow-hidden">
+    <section id="news" className="py-20 bg-[#f5f5f5] relative overflow-hidden">
       <motion.div
         className="absolute inset-0"
         animate={{
@@ -93,9 +93,10 @@ const NewsPreviewSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-blue-900 mb-3 line-clamp-2">
+                <h3 className="text-xl font-bold text-[#f1c235] mb-3 line-clamp-2">
                   {article.title}
                 </h3>
+
                 <p className="text-gray-600 mb-4 line-clamp-2">
                   {article.summary}
                 </p>
@@ -104,7 +105,7 @@ const NewsPreviewSection = () => {
           ))}
         </div>
         <div className="text-center">
-          <Button href="/newspage" variant="secondary">
+          <Button to="/newspage" variant="primary">
             View All News
           </Button>
         </div>

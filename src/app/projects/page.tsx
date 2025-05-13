@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useProjects } from "../hooks/useProjects";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
-import {Project} from "@prisma/client";
+import { Project } from "@prisma/client";
 const projectCategories = ["All", "Planning", "Ongoing", "Completed"];
 const ProjectCard = ({ project }: { project: Project }) => {
   const normalizeStatus = (status: string) => {
@@ -161,7 +161,7 @@ const ProjectsPage = () => {
             </p>
           </div>
         </section>
-        <section className="py-16 bg-black">
+        <section className="py-16 bg-[#f5f5f5]">
           <div className="container mx-auto px-4">
             <SectionTitle
               title="Project Portfolio"
@@ -176,7 +176,7 @@ const ProjectsPage = () => {
                   className={`px-6 py-2 rounded-full transition-colors duration-200 ${
                     activeCategory === category
                       ? "bg-[#f1c235] text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
                 >
                   {category}

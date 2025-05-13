@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import SectionTitle from "../Components/ui/SectionTitle";
-import {  EyeIcon, TargetIcon } from "lucide-react";
+import { EyeIcon, TargetIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import WordCarousel from "../Components/animations/WorldCarousel";
 
@@ -155,7 +155,6 @@ const TeamMemberCard = ({ member }: { member: (typeof teamMembers)[0] }) => {
     >
       <div className="relative">
         <div className="aspect-square w-full overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={member.image}
             alt={member.name}
@@ -168,7 +167,7 @@ const TeamMemberCard = ({ member }: { member: (typeof teamMembers)[0] }) => {
           <p className="text-gray-600 text-sm mt-3">{member.shortBio}</p>
         </div>
         <motion.div
-          className="absolute inset-0 bg-white p-6 flex flex-col opacity-0 group-hover:opacity-100 transition-all duration-300"
+          className="absolute inset-0 bg-yellow-500 p-6 flex flex-col opacity-0 group-hover:opacity-100 transition-all duration-300"
           initial={{
             opacity: 0,
           }}
@@ -256,7 +255,7 @@ const AboutPage = () => {
           </div>
         </section>
 
-        <section className="py-16 bg-black">
+        <section className="py-16 bg-[#f5f5f5]">
           <div className="container mx-auto px-4">
             <div className="flex items-center gap-2">
               <span className="text-[50px] font-bold text-[#f1c235]">We</span>
@@ -270,7 +269,7 @@ const AboutPage = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <p className="mb-4 mt-4 text-white">
+                <p className="mb-4 mt-4 text-black">
                   Being a market thought leader since 2014, 3G Consultants (Pvt)
                   Ltd, has been making innovative waves in the rapidly
                   developing construction industry in Sri Lanka. Specializing in
@@ -280,7 +279,7 @@ const AboutPage = () => {
                   and more, 3G Consultant (Pvt) Ltd, has roared in the industry
                   by providing exceptional service to its clientele.
                 </p>
-                <p className="mb-4 text-white">
+                <p className="mb-4 text-black">
                   Providing an array of services such as Geometric Surveys,
                   Feasibility Studies, Action Plans, Sociological, and
                   Environmental Studies, Engineering Design, Economic and
@@ -294,7 +293,7 @@ const AboutPage = () => {
                   unwavering commitment to client’s success. That’s what sets us
                   apart. We are here for the long-haul.
                 </p>
-                <p className="mb-4 text-white">
+                <p className="mb-4 text-black">
                   Our team can seamlessly work with multi-disciplined teams both
                   locally and internationally as they come from a vast array of
                   technical backgrounds and have worked with many different
@@ -307,7 +306,7 @@ const AboutPage = () => {
                   help of our state-of-the-art software solutions we use at 3G
                   Consultants (Pvt) Ltd.
                 </p>
-                <p className="text-white">
+                <p className="text-black">
                   We take pride in focusing on reducing risk and improving the
                   value we provide for customers while delivering an
                   all-inclusive suite of construction consulting expertise in
@@ -316,13 +315,11 @@ const AboutPage = () => {
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
                   alt="Construction team"
                   className="rounded-lg h-64 w-full object-cover"
                 />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                   alt="Historical project"
@@ -342,9 +339,9 @@ const AboutPage = () => {
                   <h2 className="text-3xl font-bold text-black">Our Vision</h2>
                 </div>
                 <p className="text-gray-700 mb-4 italic font-semibold">
-                  &#34;To be a world-class engineering consultancy firm committed to
-                  total customer satisfaction and enriching shareholder&#39;s
-                  value...&#34;
+                  "To be a world-class engineering consultancy firm committed to
+                  total customer satisfaction and enriching shareholder's
+                  value..."
                 </p>
               </div>
               <div className="bg-white p-8 rounded-lg shadow-md">
@@ -353,19 +350,19 @@ const AboutPage = () => {
                   <h2 className="text-3xl font-bold text-black">Our Mission</h2>
                 </div>
                 <p className="text-gray-700 mb-4 italic font-semibold">
-                  &#34;Our Mission is to strengthen our position as a market leader
-                  and become the &#39;go-to&#39; consultancy, for project and
+                  "Our Mission is to strengthen our position as a market leader
+                  and become the 'go-to' consultancy, for project and
                   construction management both locally and globally, by building
                   on our strengths - innovative thinking, excellent quality
                   assurance, timely completion, state of the art technology, and
-                  exhibiting the highest standards of expertise...&#34;
+                  exhibiting the highest standards of expertise..."
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16 bg-black">
+        <section className="py-16 bg-[#f5f5f5]">
           <div className="container mx-auto px-4">
             <SectionTitle
               title="Director Board"
@@ -379,21 +376,6 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
-
-        {/* <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <SectionTitle
-              title="Our Staff"
-              subtitle="Meet the dedicated professionals who make our success possible."
-              centered={true}
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-              {regularStaff.map((member, index) => (
-                <StaffCard key={index} member={member} />
-              ))}
-            </div>
-          </div>
-        </section> */}
       </div>
       <Footer />
     </>
