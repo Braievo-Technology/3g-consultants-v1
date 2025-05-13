@@ -32,15 +32,15 @@ export interface Project {
   images: ProjectImage[]
 }
 export interface CreateProjectDTO {
-  project_name: string
-  description: string
-  location: string
-  start_date: Date
-  end_date: Date
-  status: ProjectStatus
-  budget: number
-  category: ProjectCategory
-  images: File[]
+  project_name: string;
+  description: string;
+  location: string;
+  start_date: Date;
+  end_date: Date;
+  status: ProjectStatus;
+  budget: number;
+  category: ProjectCategory;
+  images: File[];
 }
 export const projectService = {
   getAllProjects: async () => {
