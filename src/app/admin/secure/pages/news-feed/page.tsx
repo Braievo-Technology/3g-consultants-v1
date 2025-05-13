@@ -22,6 +22,8 @@ const NewsFeedPage: React.FC = () => {
   const fetchNews = async () => {
     try {
       const data = await newsFeedService.getAllNews();
+      console.log("Fetched news data:", data);
+      
       setNews(data);
       setFilteredNews(data);
     } catch (error) {
@@ -191,14 +193,14 @@ const NewsFeedPage: React.FC = () => {
           >
             <NewsForm
                 onSubmit={editingArticle ? handleUpdate : handleAddArticle}
-              /*  initialData={{
+                initialData={{
                   title: editingArticle?.title ?? "", // Ensure title is a string
                   summary: editingArticle?.summary ?? "", // Ensure summary is a string
 
                   createTime: editingArticle?.createTime ?? new Date(), // Fallback to current date if createTime is null
                   id: editingArticle?.id ?? 0, // Fallback to id if missing
                   images: editingArticle?.images ?? "", // Ensure images is a string
-                }}*/
+                }}
             />
           </Modal>
           <div className="mt-4 text-sm text-gray-500">

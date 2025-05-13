@@ -4,7 +4,6 @@ export interface NewsFeed {
     id: number
     title: string
     summary: string
-
     images: string
     createdAt?: Date
     updatedAt?: Date
