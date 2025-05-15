@@ -1,23 +1,27 @@
-// middleware.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+/*
+import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
-    const { pathname } = request.nextUrl
+    const { pathname } = request.nextUrl;
 
-    // Match all /admin/pages/* routes EXCEPT the login page
-    if (pathname.startsWith('/admin/login/:path*')) {
-        const token = request.cookies.get('admin-auth')?.value
+    // Allow access to login page
+    if (pathname === "/admin" || pathname === "/admin/page" || pathname.startsWith("/api")) {
+        return NextResponse.next();
+    }
 
-        if (!token) {
-            return NextResponse.redirect(new URL('/admin/login', request.url))
+    // Protect /admin/secure/!**
+    if (pathname.startsWith("/admin/secure")) {
+        const isAdminAuth = request.cookies.get("admin-auth")?.value;
+
+        if (isAdminAuth !== "true") {
+            return NextResponse.redirect(new URL("/admin", request.url));
         }
     }
 
-    return NextResponse.next()
+    return NextResponse.next();
 }
 
-// 👇 Tell Next.js which routes to run the middleware on
 export const config = {
-    matcher: ['/admin/login/:path*'],
-}
+    matcher: ["/admin/:path*"],
+};
+*/

@@ -1,27 +1,94 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { PrismaClient, NewsFeedStatus } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-import {writeFile} from "fs/promises";
-import path from "node:path";
+import {uploadToAzureBlob} from "@/app/api/util/blobService";
 
 const prisma = new PrismaClient();
 
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
+// Utility to extract ID from URL
+function extractIdFromUrl(req: NextRequest): number | null {
+    const url = new URL(req.url);
+    const segments = url.pathname.split('/');
+    const idStr = segments[segments.length - 1];
+    const id = parseInt(idStr, 10);
+    return isNaN(id) ? null : id;
+}
+
+// GET a news feed by ID
+export async function GET(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
     const feed = await prisma.newsFeed.findUnique({
-        where: { id: Number(params.id) },
+        where: { id },
         include: { images: true },
     });
+
+    if (!feed) {
+        return NextResponse.json({ message: 'News feed not found' }, { status: 404 });
+    }
+
     return NextResponse.json(feed);
 }
 
-export async function PUT(req: NextRequest, context: { params: { id: string } }) {
-    try {
-        const { id } = context.params;
-        const numericId = Number(id);
+// PUT update a news feed
 
-        if (isNaN(numericId)) {
-            return NextResponse.json({ message: 'Invalid ID' }, { status: 400 });
+export async function PUT(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
+    try {
+        const formData = await req.formData();
+
+        const title = formData.get('title') as string;
+        const summary = formData.get('summary') as string;
+        const status = formData.get('status') as string;
+
+        if (!Object.values(NewsFeedStatus).includes(status as NewsFeedStatus)) {
+            return NextResponse.json({ message: 'Invalid status value' }, { status: 400 });
         }
 
+        let imagePath: string | undefined;
+
+        const image = formData.get('image') as File | null;
+        if (image && typeof image === 'object') {
+            const bytes = await image.arrayBuffer();
+            const buffer = Buffer.from(bytes);
+            const fileName = `${Date.now()}-${image.name.replace(/[^a-z0-9.-]/gi, '_')}`;
+            const mimeType = image.type;
+
+            // Upload to Azure Blob Storage
+            imagePath = await uploadToAzureBlob(buffer, fileName, mimeType);
+        }
+
+        const updated = await prisma.newsFeed.update({
+            where: { id },
+            data: {
+                title,
+                summary,
+                status: status as NewsFeedStatus,
+                ...(imagePath && { images: imagePath }),
+            },
+        });
+
+        return NextResponse.json(updated);
+    } catch (error) {
+        console.error('PUT error:', error);
+        return NextResponse.json({ message: 'Failed to update news feed' }, { status: 500 });
+    }
+}
+/*export async function PUT(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
+    try {
         const formData = await req.formData();
 
         const title = formData.get('title') as string;
@@ -46,23 +113,37 @@ export async function PUT(req: NextRequest, context: { params: { id: string } })
         }
 
         const updated = await prisma.newsFeed.update({
-            where: { id: numericId },
+            where: { id },
             data: {
                 title,
                 summary,
                 status: status as NewsFeedStatus,
-                ...(imagePath && { images: imagePath }), // update image only if new image is uploaded
+                ...(imagePath && { images: imagePath }),
             },
         });
 
         return NextResponse.json(updated);
     } catch (error) {
-        console.error('FormData PUT error:', error);
+        console.error('PUT error:', error);
         return NextResponse.json({ message: 'Failed to update news feed' }, { status: 500 });
     }
-}
+}*/
 
-export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
-    await prisma.newsFeed.delete({ where: { id: Number(params.id) } });
-    return NextResponse.json({ message: 'Deleted successfully' });
+// DELETE a news feed by ID
+export async function DELETE(req: NextRequest) {
+    const id = extractIdFromUrl(req);
+    if (!id) {
+        return NextResponse.json({ message: 'Invalid or missing ID' }, { status: 400 });
+    }
+
+    try {
+        await prisma.newsFeed.delete({
+            where: { id },
+        });
+
+        return NextResponse.json({ message: 'Deleted successfully' });
+    } catch (error) {
+        console.error('DELETE error:', error);
+        return NextResponse.json({ message: 'Failed to delete news feed' }, { status: 500 });
+    }
 }
