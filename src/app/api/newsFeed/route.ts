@@ -1,7 +1,6 @@
 import { PrismaClient, NewsFeedStatus } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-import path from "node:path";
-import {writeFile} from "fs/promises";
+import {uploadToAzureBlob} from "@/app/api/util/blobService";
 
 
 const prisma = new PrismaClient();
@@ -16,6 +15,7 @@ export async function GET() {
     }
 }
 
+/*
 export async function POST(req: NextRequest) {
     try {
         const formData = await req.formData();
@@ -45,6 +45,45 @@ export async function POST(req: NextRequest) {
                 summary,
                 status: status as NewsFeedStatus,
                 images: imagePath,
+            },
+        });
+
+        return NextResponse.json(newFeed);
+    } catch (error) {
+        console.error('Error creating news feed:', error);
+        return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+    }
+}*/
+export async function POST(req: NextRequest) {
+    try {
+        const formData = await req.formData();
+
+        const title = formData.get('title') as string;
+        const summary = formData.get('summary') as string;
+        const status = formData.get('status') as string;
+        const image = formData.get('image') as File;
+
+        if (!title || !status || !image || !Object.values(NewsFeedStatus).includes(status as NewsFeedStatus)) {
+            return NextResponse.json({ message: 'Missing or invalid fields' }, { status: 400 });
+        }
+
+        // Convert image to buffer
+        const bytes = await image.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const fileName = `${Date.now()}-${image.name.replace(/[^a-z0-9.-]/gi, '_')}`;
+        const mimeType = image.type;
+
+        // Upload to Azure Blob Storage
+        const blobUrl = await uploadToAzureBlob(buffer, fileName, mimeType);
+
+        // Save the blob URL to the database
+        const newFeed = await prisma.newsFeed.create({
+            data: {
+                title,
+                summary,
+                status: status as NewsFeedStatus,
+                images: blobUrl, // Azure Blob URL stored
+                createTime: new Date(),
             },
         });
 

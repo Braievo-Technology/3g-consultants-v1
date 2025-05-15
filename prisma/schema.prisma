@@ -75,7 +75,7 @@ model Event {
   location    String?
   capacity    Int?
   status      EventStatus
-  description String?
+  description String?       @db.Text
   images      EventImages[]
 }
 
