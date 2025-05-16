@@ -24,12 +24,12 @@ export default function Sidebar() {
       name: "Dashboard",
       href: "/admin/secure/pages/dashboard",
       icon: <Home size={18} />,
-    },
-    {
-      name: "Company Events",
-      href: "/admin/secure/pages/company-events",
-      icon: <Calendar size={18} />,
-    },
+     },
+    // {
+    //   name: "Company Events",
+    //   href: "/admin/secure/pages/company-events",
+    //   icon: <Calendar size={18} />,
+    // },
     {
       name: "Job Application",
       href: "/admin/secure/pages/job-applications",
