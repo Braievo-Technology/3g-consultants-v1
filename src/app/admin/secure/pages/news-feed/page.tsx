@@ -19,18 +19,7 @@ const NewsFeedPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterValue, setFilterValue] = useState("all");
   const [, setIsLoading] = useState(true);
-  /*const router = useRouter();*/
 
-/*  useEffect(() => {
-    const checkAuth = async () => {
-      const isAdmin = document.cookie.includes("admin-auth=true");
-      if (!isAdmin) {
-        router.replace("/admin"); // properly await
-      }
-    };
-
-    checkAuth();
-  }, [router]);*/
 
   const fetchNews = async () => {
     try {

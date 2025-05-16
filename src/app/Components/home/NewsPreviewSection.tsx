@@ -86,7 +86,7 @@ const NewsPreviewSection = () => {
                   transition={{
                     duration: 0.3,
                   }}
-                  src={`http://localhost:3000${article.images}`}
+                  src={`${article.images}`}
                   alt={article.title}
                   className="w-full h-full object-cover"
                 />

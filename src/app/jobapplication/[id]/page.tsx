@@ -35,6 +35,7 @@ interface FormData {
 const JobApplicationPage = () => {
   const router = useRouter();
   const params = useParams();
+  // @ts-ignore
   const [job, setJob] = useState<never>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
@@ -136,7 +137,7 @@ const JobApplicationPage = () => {
         experience: formData.relevantExperience,
         expected_salary: parseFloat(formData.expectedSalary) || undefined,
         skills: Array.isArray(formData.skills) ? formData.skills : [],
-        jobOpportunityId: Number(jobId.id),
+        jobOpportunityId: Number(params.id),
         cv: formData.cv,
         cover_letter: formData.coverLetter,
       };
@@ -394,12 +395,12 @@ const JobApplicationPage = () => {
                 type="file"
                 name="cv"
                 onChange={handleFileChange}
-                accept=".pdf,.doc,.docx"
+                accept="application/pdf"
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <p className="text-sm text-gray-500 mt-1">
-                Accepted formats: PDF, DOC, DOCX (Max 5MB)
+                Accepted formats: PDF(Max 5MB)
               </p>
             </div>
             <div>

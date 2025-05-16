@@ -8,4 +8,5 @@ export interface News {
   summary: string;
   status: NewsStatus;
   images: string;
+  createTime: string;
 }

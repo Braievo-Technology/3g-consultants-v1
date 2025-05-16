@@ -33,7 +33,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       <div className="relative aspect-[4/3]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`http://localhost:3000${project.images[0]?.image_name}`}
+          src={`${project.images[0]?.image_name}`}
           alt={project.project_name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
