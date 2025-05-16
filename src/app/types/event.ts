@@ -1,11 +1,11 @@
 export enum EventType {
-  conference = 'conference',
-  workshop = 'workshop',
+  conference = "conference",
+  workshop = "workshop",
 }
 export enum EventStatus {
-  upcoming = 'upcoming',
-  active = 'active',
-  completed = 'completed',
+  upcoming = "upcoming",
+  active = "active",
+  completed = "completed",
 }
 export interface EventImage {
   id: number;

@@ -1,6 +1,6 @@
-'use client';
-import { useState, useEffect, useCallback } from 'react';
-import { Event, eventService } from '@/app/services/api/eventService';
+"use client";
+import { useState, useEffect, useCallback } from "react";
+import { Event, eventService } from "@/app/services/api/eventService";
 
 export const useEvent = (id: number) => {
   const [event, setEvent] = useState<Event | null>(null);
@@ -21,8 +21,8 @@ export const useEvent = (id: number) => {
   }, [id]);
 
   useEffect(() => {
-    fetchEvent().then(r => {
-      console.log(r)
+    fetchEvent().then((r) => {
+      console.log(r);
     });
   }, [fetchEvent]);
 
@@ -30,6 +30,6 @@ export const useEvent = (id: number) => {
     event,
     loading,
     error,
-    refetch: fetchEvent
+    refetch: fetchEvent,
   };
 };

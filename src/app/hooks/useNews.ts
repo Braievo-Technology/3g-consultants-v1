@@ -1,7 +1,7 @@
-"use client"
-import { useState, useEffect } from 'react';
-import { News } from '@/app/types/news';
-import { newsService } from '@/app/services/api/newsService';
+"use client";
+import { useState, useEffect } from "react";
+import { News } from "@/app/types/news";
+import { newsService } from "@/app/services/api/newsService";
 export const useNews = () => {
   const [news, setNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,6 +25,6 @@ export const useNews = () => {
     news,
     loading,
     error,
-    refetch: fetchNews
+    refetch: fetchNews,
   };
 };

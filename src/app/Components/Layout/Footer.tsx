@@ -182,7 +182,7 @@ const Footer = () => {
                   whileHover="hover"
                 >
                   <Link
-                    href={`/services/`}
+                    href={`/servicespage/`}
                     className="flex items-center text-gray-500 hover:text-[#f1c235] transition-colors"
                   >
                     <ChevronRightIcon size={16} className="mr-2" />
