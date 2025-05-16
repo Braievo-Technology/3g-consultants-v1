@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
+import LocationMap from "../Components/map/LocationMap";
 const ContactPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -283,20 +284,15 @@ const ContactPage = () => {
           </div>
         </section>
         {/* Map Section */}
-        <section className="py-16 bg-[#f5f5f5]">
+        <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <SectionTitle
               title="Our Location"
               subtitle="Visit our headquarters or reach out to our regional offices."
               centered={true}
             />
-            <div className="mt-8 h-96 bg-gray-300 rounded-lg overflow-hidden">
-              {/* In a real application, you would integrate Google Maps here */}
-              <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                <p className="text-gray-600">
-                  Google Maps would be integrated here
-                </p>
-              </div>
+            <div className="mt-8 h-[500px] rounded-lg overflow-hidden shadow-lg">
+              <LocationMap />
             </div>
           </div>
         </section>
