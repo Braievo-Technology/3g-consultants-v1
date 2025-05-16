@@ -352,7 +352,7 @@ const CareersPage = () => {
               better future through innovative engineering and construction
               solutions.
             </p>
-            <Button to="/contact" variant="secondary">
+            <Button to="/contactpage" variant="secondary">
               Contact Our Recruitment Team
             </Button>
           </div>

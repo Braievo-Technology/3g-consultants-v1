@@ -98,23 +98,6 @@ const JobApplications: React.FC = () => {
         </div>
       ),
     },
-    {
-      key: "skills",
-      header: "Skills",
-      width: "30%",
-      render: (value: JobApplicationSkill[]) => (
-        <div className="flex flex-wrap gap-1">
-          {value.map((skill) => (
-            <span
-              key={skill.id}
-              className="text-xs bg-blue-50 text-blue-700 rounded-full px-2 py-0.5"
-            >
-              {skill.skill}
-            </span>
-          ))}
-        </div>
-      ),
-    },
   ];
 
   return (

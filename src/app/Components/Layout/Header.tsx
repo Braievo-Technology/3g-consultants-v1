@@ -77,11 +77,6 @@ const Header = () => {
       path: "/news",
     },
     {
-      label: "Events",
-      sectionId: "events",
-      path: "/events",
-    },
-    {
       label: "Careers",
       path: "../careerspage",
     },

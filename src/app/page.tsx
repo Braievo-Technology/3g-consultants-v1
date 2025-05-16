@@ -34,12 +34,9 @@ export default function HomePage() {
       <div id="news">
         <NewsPreviewSection />
       </div>
-      <div id="events">
-        <EventsPreviewSection />
-      </div>
-      <div id="testimonials">
+      {/* <div id="testimonials">
         <TestimonialsSection />
-      </div>
+      </div> */}
       <div id="contact">
         <CtaSection />
       </div>

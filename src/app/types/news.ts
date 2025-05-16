@@ -1,6 +1,6 @@
 export enum NewsStatus {
-  published = 'published',
-  draft = 'draft',
+  published = "published",
+  draft = "draft",
 }
 export interface News {
   id: number;
@@ -8,4 +8,5 @@ export interface News {
   summary: string;
   status: NewsStatus;
   images: string;
+  createTime: string;
 }

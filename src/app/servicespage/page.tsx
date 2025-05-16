@@ -161,7 +161,7 @@ const ServicesPage = () => {
               Our team of experts can develop a tailored approach to meet your
               specific project requirements.
             </p>
-            <Button to="/contact" variant="secondary">
+            <Button to="/contactpage" variant="secondary">
               Contact Us for a Consultation
             </Button>
           </div>

@@ -45,35 +45,35 @@ export default function AdminLoginPage() {
   };
 
   return (
-      <div className="flex justify-center items-center h-screen bg-gray-100">
-        <form
-            onSubmit={handleLogin}
-            className="bg-white p-8 rounded shadow-md w-96 space-y-4"
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <form
+        onSubmit={handleLogin}
+        className="bg-white p-8 rounded shadow-md w-96 space-y-4"
+      >
+        <h2 className="text-2xl font-bold text-center">Admin Login</h2>
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-full border px-3 py-2 rounded"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border px-3 py-2 rounded"
+        />
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded"
+          disabled={loading}
         >
-          <h2 className="text-2xl font-bold text-center">Admin Login</h2>
-          {error && <p className="text-red-500 text-center">{error}</p>}
-          <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full border px-3 py-2 rounded"
-          />
-          <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full border px-3 py-2 rounded"
-          />
-          <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded"
-              disabled={loading}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
-      </div>
+          {loading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+    </div>
   );
 }

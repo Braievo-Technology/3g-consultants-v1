@@ -74,7 +74,7 @@ const NewsPage = () => {
                   <div className="relative h-48">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`http://localhost:3000${article.images}`}
+                      src={`${article.images}`}
                       alt={article.title}
                       className="w-full h-full object-cover"
                     />
@@ -99,7 +99,7 @@ const NewsPage = () => {
                           className="mr-2 text-yellow-500"
                         />
                         <span>
-                          {new Date(article.date).toLocaleDateString()}
+                          {new Date(article.createTime).toLocaleDateString()}
                         </span>
                       </div>
                     </div>
