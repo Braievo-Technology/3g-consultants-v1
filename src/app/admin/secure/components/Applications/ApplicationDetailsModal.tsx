@@ -134,7 +134,7 @@ export const ApplicationDetailsModal: React.FC<
               </h4>
               <div className="space-y-2">
                 <a
-                  href={`/assets/cv/${application.cv_name}`}
+                  href={`${application.cv_name}`}
                   download
                   target="_blank"
                   rel="noopener noreferrer"

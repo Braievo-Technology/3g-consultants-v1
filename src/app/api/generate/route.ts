@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Document, Packer, Paragraph, Media } from 'docx';
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import path from 'path';
+import { uploadToAzureBlob } from '@/app/api/util/blobService';
 
 interface ProjectImage {
     id: number;
@@ -63,17 +62,19 @@ export async function POST(req: NextRequest) {
                 new Paragraph({ text: `Description: ${project.description}` }),
             );
 
-            for (const image of project.images) {
+         /*   for (const image of project.images) {
                 const imagePath = path.join(process.cwd(), 'public', image.image_name);
                 try {
                     const imageBuffer = readFileSync(imagePath);
-                    const imageDoc = Media.addImage(doc, imageBuffer);
+
+                    // Show image with fixed width and height
+                    const imageDoc = Media.addImage(doc, imageBuffer, 400, 300); // width x height in pixels
                     children.push(new Paragraph(imageDoc));
                 } catch (err) {
-                    console.log(err)
+                    console.error(`Image not found: ${image.image_name}`, err);
                     children.push(new Paragraph({ text: `Image not found: ${image.image_name}` }));
                 }
-            }
+            }*/
 
             children.push(new Paragraph({ text: '------------------------------------------' }));
         }
@@ -82,20 +83,12 @@ export async function POST(req: NextRequest) {
 
         const buffer = await Packer.toBuffer(doc);
 
-        const outputDir = path.join(process.cwd(), 'public', 'generate');
-        if (!existsSync(outputDir)) {
-            mkdirSync(outputDir, { recursive: true });
-        }
-
         const fileName = generateFileName();
-        const filePath = path.join(outputDir, fileName);
+        const mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 
-        writeFileSync(filePath, buffer);
+        const blobUrl = await uploadToAzureBlob(buffer, fileName, mimeType);
 
-        // ✅ Return public path for accessing the file
-        const publicFilePath = `/generate/${fileName}`;
-
-        return NextResponse.json({ message: 'Document generated', filePath: publicFilePath }, { status: 200 });
+        return NextResponse.json({ message: 'Document generated', filePath: blobUrl }, { status: 200 });
 
     } catch (error) {
         console.error('Error generating document:', error);
