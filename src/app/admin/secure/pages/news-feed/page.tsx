@@ -9,8 +9,6 @@ import { DataTable } from "@/app/admin/secure/components/UI/DataTable";
 import { Modal } from "@/app/admin/secure/components/UI/Modal";
 import { NewsForm } from "@/app/admin/secure/components/News/NewsForm";
 
-
-
 const NewsFeedPage: React.FC = () => {
   const [news, setNews] = useState<NewsFeed[]>([]);
   const [filteredNews, setFilteredNews] = useState<NewsFeed[]>([]);
@@ -21,7 +19,7 @@ const NewsFeedPage: React.FC = () => {
   const [, setIsLoading] = useState(true);
   /*const router = useRouter();*/
 
-/*  useEffect(() => {
+  /*  useEffect(() => {
     const checkAuth = async () => {
       const isAdmin = document.cookie.includes("admin-auth=true");
       if (!isAdmin) {
@@ -114,15 +112,10 @@ const NewsFeedPage: React.FC = () => {
       width: "35%",
     },
     {
-      key: "date",
-      header: "Date",
+      key: "createTime",
+      header: "createTime",
       width: "10%",
       render: (value: string) => new Date(value).toLocaleDateString(),
-    },
-    {
-      key: "author",
-      header: "Author",
-      width: "15%",
     },
     {
       key: "status",
