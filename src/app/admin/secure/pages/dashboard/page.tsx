@@ -93,7 +93,7 @@ const Dashboard: React.FC = () => {
   }
   return (
     <PageTransition>
-      <div className="px-4 py-6 md:px-6 lg:px-8">
+      <div className="px-4 py-10 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
           {statsCards.map((stat, index) => (
             <StatsCard
@@ -106,7 +106,7 @@ const Dashboard: React.FC = () => {
             />
           ))}
         </div>
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        {/* <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-lg font-medium mb-4">Quick Actions</h2>
@@ -213,7 +213,7 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </PageTransition>
   );

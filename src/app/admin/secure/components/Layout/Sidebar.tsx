@@ -26,11 +26,6 @@ export default function Sidebar() {
       icon: <Home size={18} />,
     },
     {
-      name: "Company Events",
-      href: "/admin/secure/pages/company-events",
-      icon: <Calendar size={18} />,
-    },
-    {
       name: "Job Application",
       href: "/admin/secure/pages/job-applications",
       icon: <Users size={18} />,
