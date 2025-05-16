@@ -229,7 +229,7 @@ const GenerateDocument: React.FC = () => {
                       <div className="aspect-video w-1/3">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={`http://localhost:3000${project.images[0]?.image_name}`}
+                          src={`${project.images[0]?.image_name}`}
                           alt={project.project_name}
                           className="h-full w-full rounded-lg object-cover"
                         />
